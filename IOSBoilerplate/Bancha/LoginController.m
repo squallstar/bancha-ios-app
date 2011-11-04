@@ -3,10 +3,11 @@
 //  Bancha
 //
 //  Created by Nicholas Valbusa on 04/11/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Squallstar Studio. All rights reserved.
 //
 
 #import "LoginController.h"
+#import "Api.h"
 
 @interface LoginController ()
 - (void)onLogin:(QButtonElement *)buttonElement;
@@ -36,23 +37,31 @@
     self.navigationController.navigationBar.tintColor = nil;
 }
 
-/*
-- (void)loginCompleted:(LoginInfo *)info {
-    [self loading:NO];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Welcome" message:[NSString stringWithFormat: @"Hi %@, you're loving QuickForms!", info.login] delegate:self cancelButtonTitle:@"YES!" otherButtonTitles:nil];
-    [alert show];
 
+- (void)loginCompleted {
+    
+	NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:3];
+	
+	QSection *sect = [self.root getSectionForIndex:0];
+	for (QEntryElement *el in [sect elements]) {
+		if (el.textValue) {
+			[data setObject:el.textValue forKey:el.key];
+		}
+	}
+	
+	BOOL done = [Api loginToPath:[data objectForKey:@"url"]
+					withUsername:[data objectForKey:@"username"]
+					 andPassword:[data objectForKey:@"password"]
+				 ];
+	
+	[self loading:NO];
 	
 }
-*/
+
 
 - (void)onLogin:(QButtonElement *)buttonElement {
     [self loading:YES];
-   /* LoginInfo *info = [[LoginInfo alloc] init];
-    [self.root fetchValueIntoObject:info];
-	
-    [self performSelector:@selector(loginCompleted:) withObject:info afterDelay:2];
-	*/
+    [self performSelector:@selector(loginCompleted) withObject:nil afterDelay:1];
 }
 
 - (void)onAbout {
@@ -100,7 +109,7 @@
 	
 	QEntryElement *login = [[QEntryElement alloc] init];
     login.title = @"Username";
-    login.key = @"login";
+    login.key = @"username";
     login.hiddenToolbar = YES;
     login.placeholder = @"admin";
     [main addElement:login];
