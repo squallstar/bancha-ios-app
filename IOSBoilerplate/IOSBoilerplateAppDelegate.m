@@ -56,8 +56,13 @@
                                                               diskPath:[AFURLCache defaultCachePath]] autorelease];
     
 	[NSURLCache setSharedURLCache:URLCache];
+	
+	
+
+	
+	UINavigationController *navigation = [QuickDialogController controllerWithNavigationForRoot:[LoginController createLoginForm]];
     
-    self.window.rootViewController = self.loginController;
+	self.window.rootViewController = navigation;
     [self.window makeKeyAndVisible];
     return YES;
 }

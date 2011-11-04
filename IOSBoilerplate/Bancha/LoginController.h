@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginController : UIViewController
+@interface LoginController : QuickDialogController  <QuickDialogStyleProvider>
+
++ (QRootElement *)createLoginForm;
++ (QRootElement *)createDetailsForm;
 
 @end
