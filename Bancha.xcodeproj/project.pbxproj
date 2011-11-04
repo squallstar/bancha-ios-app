@@ -111,6 +111,7 @@
 		E151042F1464394200CEF7C1 /* QWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E151040E1464394200CEF7C1 /* QWebViewController.m */; };
 		E151043414643F9200CEF7C1 /* grain.gif in Resources */ = {isa = PBXBuildFile; fileRef = E151043314643F9200CEF7C1 /* grain.gif */; };
 		E15104361464408300CEF7C1 /* logo_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = E15104351464408300CEF7C1 /* logo_shadow.png */; };
+		E151043B1464427600CEF7C1 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = E151043A1464427600CEF7C1 /* Constants.m */; };
 		F87266BC145EF4E200B775D3 /* TwitterSearchClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F87266BB145EF4E200B775D3 /* TwitterSearchClient.m */; };
 /* End PBXBuildFile section */
 
@@ -300,6 +301,8 @@
 		E151040E1464394200CEF7C1 /* QWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWebViewController.m; sourceTree = "<group>"; };
 		E151043314643F9200CEF7C1 /* grain.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = grain.gif; sourceTree = "<group>"; };
 		E15104351464408300CEF7C1 /* logo_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_shadow.png; sourceTree = "<group>"; };
+		E15104391464427600CEF7C1 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		E151043A1464427600CEF7C1 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		F87266BA145EF4E200B775D3 /* TwitterSearchClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterSearchClient.h; sourceTree = "<group>"; };
 		F87266BB145EF4E200B775D3 /* TwitterSearchClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterSearchClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -560,6 +563,8 @@
 		E12A2FD51464276900E4249C /* Bancha */ = {
 			isa = PBXGroup;
 			children = (
+				E15104391464427600CEF7C1 /* Constants.h */,
+				E151043A1464427600CEF7C1 /* Constants.m */,
 				E12A2FD61464279500E4249C /* LoginController.h */,
 				E12A2FD71464279500E4249C /* LoginController.m */,
 			);
@@ -802,6 +807,7 @@
 				E151042D1464394200CEF7C1 /* QuickDialogTableView.m in Sources */,
 				E151042E1464394200CEF7C1 /* QWebElement.m in Sources */,
 				E151042F1464394200CEF7C1 /* QWebViewController.m in Sources */,
+				E151043B1464427600CEF7C1 /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
