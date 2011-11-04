@@ -7,7 +7,7 @@
 //
 
 #import "LoginController.h"
-#import "Api.h"
+#import "IOSBoilerplateAppDelegate.h"
 
 @interface LoginController ()
 - (void)onLogin:(QButtonElement *)buttonElement;
@@ -49,10 +49,7 @@
 		}
 	}
 	
-	BOOL done = [Api loginToPath:[data objectForKey:@"url"]
-					withUsername:[data objectForKey:@"username"]
-					 andPassword:[data objectForKey:@"password"]
-				 ];
+	BOOL done = [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] loginToPath:[data objectForKey:@"url"] withUsername:[data objectForKey:@"username"] andPassword:[data objectForKey:@"password"]];	
 	
 	[self loading:NO];
 	

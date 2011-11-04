@@ -33,7 +33,7 @@
 @implementation IOSBoilerplateAppDelegate
 
 @synthesize window = _window;
-@synthesize loginController = _loginController;
+@synthesize loginController = _loginController, api;
 
 + (IOSBoilerplateAppDelegate*) sharedAppDelegate {
 	return (IOSBoilerplateAppDelegate*) [UIApplication sharedApplication].delegate;
@@ -57,7 +57,7 @@
     
 	[NSURLCache setSharedURLCache:URLCache];
 	
-	
+	self.api = [[Api alloc] init];
 
 	
 	UINavigationController *navigation = [QuickDialogController controllerWithNavigationForRoot:[LoginController createLoginForm]];
@@ -112,6 +112,7 @@
 
 - (void)dealloc
 {
+	[api release];
     [_window release];
     [_loginController release];
     [super dealloc];

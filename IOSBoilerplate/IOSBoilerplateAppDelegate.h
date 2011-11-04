@@ -27,12 +27,15 @@
 //  
 
 #import <UIKit/UIKit.h>
+#import "Api.h"
 #import "LoginController.h"
 
-@interface IOSBoilerplateAppDelegate : NSObject <UIApplicationDelegate>
+@interface IOSBoilerplateAppDelegate : NSObject <UIApplicationDelegate> {
+	Api *api;
+}
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-
+@property (nonatomic, retain) Api *api;
 @property (nonatomic, retain) IBOutlet LoginController *loginController;
 
 + (IOSBoilerplateAppDelegate*) sharedAppDelegate;

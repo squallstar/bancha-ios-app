@@ -7,23 +7,31 @@
 //
 
 #import "Api.h"
-#import "AFJSONRequestOperation.h"
 
 @implementation Api
 
-+(BOOL)loginToPath:(NSString*)adminPath withUsername:(NSString*)username andPassword:(NSString*)password {
+@synthesize client;
+
+-(id)init {
+	self = [super init];
+	
+	self.client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@""]];
+	
+	return self;
+}
+
+-(BOOL)loginToPath:(NSString*)adminPath withUsername:(NSString*)username andPassword:(NSString*)password {
 	
 	
 	NSMutableCharacterSet *set = [NSMutableCharacterSet characterSetWithCharactersInString:@"/"];
 	
 	NSString *trimmedUri = [adminPath stringByTrimmingCharactersInSet:set];
 	
+	[self.client release];
+	self.client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@", trimmedUri]]];
 	
-	NSString *url = [NSString stringWithFormat:@"http://%@/api/login", trimmedUri];
-	
-	NSLog(@"Calling %@", url);
-	
-	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+	NSURLRequest *request = [self.client requestWithMethod:@"POST" path:@"api/login" parameters:[NSDictionary dictionaryWithObjectsAndKeys:username, @"username", password, @"password", nil]];
+
 	AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 		
 		NSString *msg = [JSON valueForKeyPath:@"message"];
@@ -47,5 +55,6 @@
 	return YES;
 	
 }
+
 
 @end

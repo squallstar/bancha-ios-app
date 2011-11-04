@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFJSONRequestOperation.h"
 
-@interface Api : NSObject
+@interface Api : NSObject  {
+	AFHTTPClient *client;
+}
 
-+(BOOL)loginToPath:(NSString*)adminPath withUsername:(NSString*)username andPassword:(NSString*)password;
+@property (nonatomic, retain) AFHTTPClient *client;
+
+-(BOOL)loginToPath:(NSString*)adminPath withUsername:(NSString*)username andPassword:(NSString*)password;
 
 @end
