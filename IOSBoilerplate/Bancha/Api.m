@@ -33,7 +33,7 @@
 	NSURLRequest *request = [self.client requestWithMethod:@"POST" path:@"api/login" parameters:[NSDictionary dictionaryWithObjectsAndKeys:username, @"username", password, @"password", nil]];
 
 	AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-		
+		NSLog(@"%@", JSON);
 		NSString *msg = [JSON valueForKeyPath:@"message"];
 		if ([msg isEqualToString:@"USER_PWD_WRONG"]) {
 			
@@ -41,6 +41,8 @@
 			[al show];
 			[al release];
 			
+		} else {
+			//Success!
 		}
 		
 		

@@ -20,14 +20,16 @@
 
 - (void)loadView {
     [super loadView];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grain.gif"]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grain.gif"]];
+	
+	self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.bounces = NO;
     ((QuickDialogTableView *)self.tableView).styleProvider = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    //self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Help" style:UIBarButtonItemStylePlain target:self action:@selector(onAbout)];
 	
 }
@@ -58,7 +60,7 @@
 
 - (void)onLogin:(QButtonElement *)buttonElement {
     [self loading:YES];
-    [self performSelector:@selector(loginCompleted) withObject:nil afterDelay:1];
+    [self performSelector:@selector(loginCompleted) withObject:nil afterDelay:2.0];
 }
 
 - (void)onAbout {
