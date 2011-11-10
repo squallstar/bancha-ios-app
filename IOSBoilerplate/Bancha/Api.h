@@ -12,6 +12,7 @@
 
 @protocol ApiDelegate 
 -(void)loginFinished:(BOOL)success;
+-(void)typesFinished:(BOOL)success;
 @end
 
 @interface Api : NSObject  {
@@ -23,5 +24,6 @@
 @property (nonatomic, retain) AFHTTPClient *client;
 
 -(BOOL)loginToPath:(NSString*)adminPath withUsername:(NSString*)username andPassword:(NSString*)password;
+-(void)getContentTypes;
 
 @end
