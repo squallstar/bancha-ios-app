@@ -6,7 +6,6 @@
 //  Copyright (c) 2011 Squallstar Studio. All rights reserved.
 //
 
-extern NSString * const APP_VERSION;
 extern NSString * const API_URL;
 
 typedef enum {
