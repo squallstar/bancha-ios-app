@@ -66,6 +66,9 @@
 		09E442D9141F9DD400AD2DAE /* SwipeableTableViewExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E442D7141F9DD400AD2DAE /* SwipeableTableViewExample.m */; };
 		09E442DA141F9DD400AD2DAE /* SwipeableTableViewExample.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09E442D8141F9DD400AD2DAE /* SwipeableTableViewExample.xib */; };
 		09E442DD141F9E3600AD2DAE /* SwipeableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E442DC141F9E3600AD2DAE /* SwipeableCell.m */; };
+		827F6436146BD3CC001AE249 /* TabsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 827F6435146BD3CC001AE249 /* TabsController.m */; };
+		828D65F9146BDEBB009F8014 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 828D65F8146BDEBB009F8014 /* SettingsController.m */; };
+		82B5F6E4146C0BE300C97A53 /* ContentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B5F6E3146C0BE300C97A53 /* ContentsController.m */; };
 		D8EA24C4145BA49100EB08B3 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA24C0145BA49100EB08B3 /* BrowserViewController.m */; };
 		D8EA24C5145BA49100EB08B3 /* BrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EA24C1145BA49100EB08B3 /* BrowserViewController.xib */; };
 		D8EA24C6145BA49100EB08B3 /* MyApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EA24C3145BA49100EB08B3 /* MyApplication.m */; };
@@ -216,6 +219,12 @@
 		09E442D8141F9DD400AD2DAE /* SwipeableTableViewExample.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwipeableTableViewExample.xib; sourceTree = "<group>"; };
 		09E442DB141F9E3600AD2DAE /* SwipeableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeableCell.h; sourceTree = "<group>"; };
 		09E442DC141F9E3600AD2DAE /* SwipeableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeableCell.m; sourceTree = "<group>"; };
+		827F6434146BD3CC001AE249 /* TabsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabsController.h; sourceTree = "<group>"; };
+		827F6435146BD3CC001AE249 /* TabsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabsController.m; sourceTree = "<group>"; };
+		828D65F7146BDEBB009F8014 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		828D65F8146BDEBB009F8014 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
+		82B5F6E2146C0BE300C97A53 /* ContentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ContentsController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		82B5F6E3146C0BE300C97A53 /* ContentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ContentsController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C37BC8E3144C340600423D44 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D8EA24BF145BA49100EB08B3 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
 		D8EA24C0145BA49100EB08B3 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
@@ -572,6 +581,12 @@
 				E151043A1464427600CEF7C1 /* Constants.m */,
 				E12A2FD61464279500E4249C /* LoginController.h */,
 				E12A2FD71464279500E4249C /* LoginController.m */,
+				827F6434146BD3CC001AE249 /* TabsController.h */,
+				827F6435146BD3CC001AE249 /* TabsController.m */,
+				828D65F7146BDEBB009F8014 /* SettingsController.h */,
+				828D65F8146BDEBB009F8014 /* SettingsController.m */,
+				82B5F6E2146C0BE300C97A53 /* ContentsController.h */,
+				82B5F6E3146C0BE300C97A53 /* ContentsController.m */,
 			);
 			name = Bancha;
 			path = IOSBoilerplate/Bancha;
@@ -814,6 +829,9 @@
 				E151042F1464394200CEF7C1 /* QWebViewController.m in Sources */,
 				E151043B1464427600CEF7C1 /* Constants.m in Sources */,
 				E151043E146446A900CEF7C1 /* Api.m in Sources */,
+				827F6436146BD3CC001AE249 /* TabsController.m in Sources */,
+				828D65F9146BDEBB009F8014 /* SettingsController.m in Sources */,
+				82B5F6E4146C0BE300C97A53 /* ContentsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
