@@ -36,7 +36,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.tintColor = nil;
+    //self.navigationController.navigationBar.tintColor = nil;
 }
 
 
@@ -57,18 +57,22 @@
 }
 
 -(void)loginFinished:(BOOL)success {
-    [self loading:NO];
     if (success) {
-        NSLog(@"Login ok");
+        NSLog(@"Login success!");
+        [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getContentTypes];
     } else {
-        
+        [self loading:NO];
     }
 }
 
+-(void)typesFinished:(BOOL)success {
+    [self loading:NO];
+    [[IOSBoilerplateAppDelegate sharedAppDelegate] switchToTabBar];
+}
 
 - (void)onLogin:(QButtonElement *)buttonElement {
     [self loading:YES];
-    [self performSelector:@selector(loginCompleted) withObject:nil afterDelay:2.0];
+    [self performSelector:@selector(loginCompleted) withObject:nil afterDelay:0.2];
 }
 
 - (void)onAbout {
@@ -139,7 +143,7 @@
 	
     [root addSection:btSection];
 	
-    btSection.footerView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"footer"]];
+    //btSection.footerView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"footer"]];
 	
     return root;
 }
