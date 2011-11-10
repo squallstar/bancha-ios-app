@@ -8,3 +8,8 @@
 
 extern NSString * const APP_VERSION;
 extern NSString * const API_URL;
+
+typedef enum {
+	StructureTree = 0,
+	StructureSimple = 1
+} Structure;
