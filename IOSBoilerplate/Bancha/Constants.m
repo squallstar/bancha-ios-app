@@ -8,5 +8,5 @@
 
 #import "Constants.h"
 
-NSString * const APP_VERSION = @"0.1";
+NSString * const APP_VERSION = @"0.2";
 NSString * const API_URL = @"/api/";

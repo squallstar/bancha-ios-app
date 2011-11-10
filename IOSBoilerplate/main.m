@@ -1,8 +1,5 @@
 //
 //  main.m
-//  IOSBoilerplate
-//
-//  Created by Alberto Gimeno Brieba on 08/09/11.
 //  Copyright 2011 Squallstar Studio. All rights reserved.
 //
 
