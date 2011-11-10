@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Api.h"
 
-
-@interface LoginController : QuickDialogController  <QuickDialogStyleProvider>
+@interface LoginController : QuickDialogController  <QuickDialogStyleProvider, ApiDelegate>
 
 + (QRootElement *)createLoginForm;
 + (QRootElement *)createDetailsForm;

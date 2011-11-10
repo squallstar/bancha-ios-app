@@ -50,11 +50,19 @@
 			[data setObject:el.textValue forKey:el.key];
 		}
 	}
+    
+    [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] setDelegate:self];
 	
-	BOOL done = [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] loginToPath:[data objectForKey:@"url"] withUsername:[data objectForKey:@"username"] andPassword:[data objectForKey:@"password"]];	
-	
-	[self loading:NO];
-	
+	[[[IOSBoilerplateAppDelegate sharedAppDelegate] api] loginToPath:[data objectForKey:@"url"] withUsername:[data objectForKey:@"username"] andPassword:[data objectForKey:@"password"]];		
+}
+
+-(void)loginFinished:(BOOL)success {
+    [self loading:NO];
+    if (success) {
+        NSLog(@"Login ok");
+    } else {
+        
+    }
 }
 
 
