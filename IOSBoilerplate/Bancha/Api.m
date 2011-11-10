@@ -79,6 +79,8 @@
     
     NSURLRequest *request = [self.client requestWithMethod:@"GET" path:@"types" parameters:[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"], @"token", nil]];
     
+    NSLog(@"using token %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"]);
+    
 	AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
 		NSString *msg = [JSON valueForKeyPath:@"message"];
@@ -112,6 +114,8 @@
 -(void)getRecordsByActiveQuery:(NSString*)activeQuery {
     NSURLRequest *request = [self.client requestWithMethod:@"GET" path:@"records" parameters:[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"], @"token", activeQuery, @"query", nil]];
     
+    NSLog(@"%@", [[request URL] query]);
+    
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSLog(@"%@", JSON);
 		NSString *msg = [JSON valueForKeyPath:@"message"];
@@ -136,7 +140,7 @@
             NSLog(@"Obtained %i records.", [records count]);
             [delegate recordsObtained:records forActiveQuery:activeQuery];
 		} else if ([msg isEqualToString:@"BAD_TOKEN"]) {      
-            [self tokenInvalidScript];
+            //[self tokenInvalidScript];
 		}
 		
 		

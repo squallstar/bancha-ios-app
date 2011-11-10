@@ -56,6 +56,8 @@
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
+    
+    self.title = @"Content types";
  
     pages = [[NSMutableArray alloc] initWithCapacity:10];
     contents = [[NSMutableArray alloc] initWithCapacity:30];
