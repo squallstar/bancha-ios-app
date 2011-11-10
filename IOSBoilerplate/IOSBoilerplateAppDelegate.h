@@ -45,8 +45,10 @@
 
 + (IOSBoilerplateAppDelegate*) sharedAppDelegate;
 
+- (NSString*)version;
 - (void)switchToTabBar;
 - (void)switchToLogin;
 - (BOOL)openURL:(NSURL*)url;
+- (void)clearUserData;
 
 @end
