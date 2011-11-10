@@ -7,6 +7,7 @@
 //
 
 #import "Api.h"
+#import "IOSBoilerplateAppDelegate.h"
 
 @implementation Api
 
@@ -19,9 +20,7 @@
         self.client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_url"]]];
     } else {
         self.client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@""]];
-    }
-	
-	
+    }	
 	
 	return self;
 }
@@ -80,8 +79,6 @@
     
     NSURLRequest *request = [self.client requestWithMethod:@"GET" path:@"types" parameters:[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"], @"token", nil]];
     
-   
-    
 	AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
 		NSString *msg = [JSON valueForKeyPath:@"message"];
@@ -111,6 +108,50 @@
 	[queue addOperation:operation];
     
 }
+
+-(void)getRecordsByActiveQuery:(NSString*)activeQuery {
+    NSURLRequest *request = [self.client requestWithMethod:@"GET" path:@"records" parameters:[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"], @"token", activeQuery, @"query", nil]];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSLog(@"%@", JSON);
+		NSString *msg = [JSON valueForKeyPath:@"message"];
+		if ([msg isEqualToString:@"BAD_QUERY"]) {
+			
+			UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Bad query!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+			[al show];
+			[al release];
+			
+		} else if ([msg isEqualToString:@"NO_RECORDS"]) {
+			
+			UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No records found!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+			[al show];
+			[al release];
+            
+            [delegate recordsObtained:[NSArray array] forActiveQuery:activeQuery];
+			
+		} else if ([msg isEqualToString:@"OK"]) {
+			//Success!
+            NSArray *records = [JSON objectForKey:@"data"];
+            
+            NSLog(@"Obtained %i records.", [records count]);
+            [delegate recordsObtained:records forActiveQuery:activeQuery];
+		} else if ([msg isEqualToString:@"BAD_TOKEN"]) {      
+            NSLog(@"Token invalid. Logging out!");
+            
+            [[IOSBoilerplateAppDelegate sharedAppDelegate] clearUserData];
+            [[IOSBoilerplateAppDelegate sharedAppDelegate] switchToLogin];
+		}
+		
+		
+	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+		NSLog(@"%@", error);
+        [delegate typesFinished:NO];
+	}];
+    
+    NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
+	[queue addOperation:operation];
+}
+
 
 
 @end

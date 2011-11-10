@@ -11,8 +11,10 @@
 
 
 @protocol ApiDelegate 
+@optional
 -(void)loginFinished:(BOOL)success;
 -(void)typesFinished:(BOOL)success;
+-(void)recordsObtained:(NSArray*)records forActiveQuery:(NSString*)typeName;
 @end
 
 @interface Api : NSObject  {
@@ -25,5 +27,6 @@
 
 -(BOOL)loginToPath:(NSString*)adminPath withUsername:(NSString*)username andPassword:(NSString*)password;
 -(void)getContentTypes;
+-(void)getRecordsByActiveQuery:(NSString*)activeQuery;
 
 @end
