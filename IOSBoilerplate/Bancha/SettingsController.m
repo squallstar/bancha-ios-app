@@ -51,10 +51,7 @@
 
 
 - (void)doLogout:(QButtonElement *)buttonElement {    
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"api_token"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"api_url"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    [[IOSBoilerplateAppDelegate sharedAppDelegate] clearUserData];
     [[IOSBoilerplateAppDelegate sharedAppDelegate] switchToLogin];
 }
 
