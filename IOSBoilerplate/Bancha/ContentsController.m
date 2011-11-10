@@ -7,11 +7,11 @@
 //
 
 #import "ContentsController.h"
-
+#import "IOSBoilerplateAppDelegate.h"
 
 @implementation ContentsController
 
-@synthesize structure, pages, contents;
+@synthesize structure, pages, contents, types;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -185,6 +185,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    NSDictionary *type = indexPath.section == 0 ? [pages objectAtIndex:indexPath.row] : [contents objectAtIndex:indexPath.row];
+    
+    NSString *query = [NSString stringWithFormat:@"type:%@|get", [type objectForKey:@"id"]];
+    
+    [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getRecordsByActiveQuery:query];
+    
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
