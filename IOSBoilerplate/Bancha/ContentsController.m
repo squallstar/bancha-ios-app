@@ -33,16 +33,22 @@
 - (void)fillContentTypes {
     [pages removeAllObjects];
     [contents removeAllObjects];
-    
-    types = [[NSUserDefaults standardUserDefaults] objectForKey:@"content_types"];
+    [types release];
+    types = [[[NSUserDefaults standardUserDefaults] objectForKey:@"content_types"] retain];
     NSArray *keys = [types allKeys];
-    NSLog(@"%@", keys);
+  
     for (NSString *key in keys) {
-        NSLog(@"%@", [[types objectForKey:key] objectForKey:@"tree"]);
+        
+#warning test the value of the "tree" for simple content types
+        
         if ([[types objectForKey:key] objectForKey:@"tree"]) {
-            
+            [pages addObject:[types objectForKey:key]];
+        } else {
+            [contents addObject:[types objectForKey:key]];    
         }
     }
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - View lifecycle
@@ -98,12 +104,24 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
+}
+
+-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return @"Pages";
+    } else {
+        return @"Contents";
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
+    if (section == 0) {
+        return [pages count];
+    } else {
+        return [contents count];
+    }
     return 0;
 }
 
@@ -117,6 +135,9 @@
     }
     
     // Configure the cell...
+    NSDictionary *item = indexPath.section == 0 ? [pages objectAtIndex:indexPath.row] : [contents objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [item objectForKey:@"description"];
     
     return cell;
 }
