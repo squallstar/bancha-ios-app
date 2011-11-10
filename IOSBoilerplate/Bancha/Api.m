@@ -136,10 +136,7 @@
             NSLog(@"Obtained %i records.", [records count]);
             [delegate recordsObtained:records forActiveQuery:activeQuery];
 		} else if ([msg isEqualToString:@"BAD_TOKEN"]) {      
-            NSLog(@"Token invalid. Logging out!");
-            
-            [[IOSBoilerplateAppDelegate sharedAppDelegate] clearUserData];
-            [[IOSBoilerplateAppDelegate sharedAppDelegate] switchToLogin];
+            [self tokenInvalidScript];
 		}
 		
 		
@@ -150,6 +147,17 @@
     
     NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
 	[queue addOperation:operation];
+}
+
+-(void)tokenInvalidScript {
+    NSLog(@"Token invalid. Logging out!");
+    
+    UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Token invalid" message:@"Your token is not valid. Please log-in again to obtain a new token." delegate:nil cancelButtonTitle:@"Login" otherButtonTitles: nil];
+    [a show];
+    [a release];
+    
+    [[IOSBoilerplateAppDelegate sharedAppDelegate] clearUserData];
+    [[IOSBoilerplateAppDelegate sharedAppDelegate] switchToLogin];
 }
 
 

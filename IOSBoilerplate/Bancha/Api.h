@@ -28,5 +28,6 @@
 -(BOOL)loginToPath:(NSString*)adminPath withUsername:(NSString*)username andPassword:(NSString*)password;
 -(void)getContentTypes;
 -(void)getRecordsByActiveQuery:(NSString*)activeQuery;
+-(void)tokenInvalidScript;
 
 @end
