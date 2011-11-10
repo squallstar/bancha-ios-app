@@ -152,7 +152,7 @@
 -(void)tokenInvalidScript {
     NSLog(@"Token invalid. Logging out!");
     
-    UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Token invalid" message:@"Your token is not valid. Please log-in again to obtain a new token." delegate:nil cancelButtonTitle:@"Login" otherButtonTitles: nil];
+    UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Token invalid" message:@"Your token is not valid. Please log-in again to obtain a new token." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
     [a show];
     [a release];
     
