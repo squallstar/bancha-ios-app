@@ -29,11 +29,13 @@
 #import "IOSBoilerplateAppDelegate.h"
 #import "AFURLCache.h"
 #import "BrowserViewController.h"
+#import "SettingsController.h"
 
 @implementation IOSBoilerplateAppDelegate
 
 @synthesize window = _window;
-@synthesize loginController = _loginController, api;
+@synthesize loginController = _loginController, api, tabsController;
+@synthesize contentsNavigation;
 
 + (IOSBoilerplateAppDelegate*) sharedAppDelegate {
 	return (IOSBoilerplateAppDelegate*) [UIApplication sharedApplication].delegate;
@@ -58,13 +60,32 @@
 	[NSURLCache setSharedURLCache:URLCache];
 	
 	self.api = [[Api alloc] init];
-
-	
-	UINavigationController *navigation = [QuickDialogController controllerWithNavigationForRoot:[LoginController createLoginForm]];
     
-	self.window.rootViewController = navigation;
+    //We create the settings form view
+    UINavigationController *settingsRoot = [QuickDialogController controllerWithNavigationForRoot:[SettingsController createSettingsForm]];
+    
+    UITabBarItem *sett = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:0];
+    [settingsRoot setTabBarItem:sett];
+    [self.tabsController addChildViewController:settingsRoot];
+
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"] != nil) {
+        [self switchToTabBar];
+    } else {
+        [self switchToLogin];
+    }
+	
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void) switchToTabBar {
+    self.window.rootViewController = [self tabsController];
+}
+
+- (void) switchToLogin {
+    UINavigationController *loginRoot = [QuickDialogController controllerWithNavigationForRoot:[LoginController createLoginForm]];
+    
+	self.window.rootViewController = loginRoot;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -115,6 +136,8 @@
 	[api release];
     [_window release];
     [_loginController release];
+    [contentsNavigation release];
+    [tabsController release];
     [super dealloc];
 }
 

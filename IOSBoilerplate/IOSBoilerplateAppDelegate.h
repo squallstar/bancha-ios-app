@@ -29,17 +29,24 @@
 #import <UIKit/UIKit.h>
 #import "Api.h"
 #import "LoginController.h"
+#import "TabsController.h"
 
 @interface IOSBoilerplateAppDelegate : NSObject <UIApplicationDelegate> {
 	Api *api;
+    TabsController *tabsController;
+    UINavigationController *contentsNavigation;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) Api *api;
 @property (nonatomic, retain) IBOutlet LoginController *loginController;
+@property (nonatomic, retain) IBOutlet TabsController *tabsController;
+@property (nonatomic, retain) IBOutlet UINavigationController *contentsNavigation;
 
 + (IOSBoilerplateAppDelegate*) sharedAppDelegate;
 
+- (void)switchToTabBar;
+- (void)switchToLogin;
 - (BOOL)openURL:(NSURL*)url;
 
 @end
