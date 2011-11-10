@@ -38,10 +38,7 @@
     NSArray *keys = [types allKeys];
   
     for (NSString *key in keys) {
-        
-#warning test the value of the "tree" for simple content types
-        
-        if ([[types objectForKey:key] objectForKey:@"tree"]) {
+        if ([[[types objectForKey:key] objectForKey:@"tree"] boolValue] == 1) {
             [pages addObject:[types objectForKey:key]];
         } else {
             [contents addObject:[types objectForKey:key]];    
