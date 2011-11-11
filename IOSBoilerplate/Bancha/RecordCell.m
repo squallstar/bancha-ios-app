@@ -7,10 +7,11 @@
 //
 
 #import "RecordCell.h"
+#import "Constants.h"
 
 @implementation RecordCell
 
-@synthesize title;
+@synthesize title, background;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -19,6 +20,14 @@
         // Initialization code
     }
     return self;
+}
+
+-(void)setStage:(BOOL)stage {
+	if (stage) {
+		[[self background] setBackgroundColor:RGB(255, 244, 195)];
+	} else {
+		[[self background] setBackgroundColor:[UIColor clearColor]];
+	}
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -130,6 +130,10 @@
     NSDictionary *record = [records objectAtIndex:indexPath.row];
     cell.title.text = [record objectForKey:[type objectForKey:@"edit_link"]];
 	
+	if (![record objectForKey:@"published"]) {
+		[cell setStage:YES];
+	}
+	
 	//First Row: 
     
     return cell;

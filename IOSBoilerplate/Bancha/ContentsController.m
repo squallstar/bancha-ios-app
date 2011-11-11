@@ -209,7 +209,7 @@
     
     NSDictionary *type = indexPath.section == 0 ? [pages objectAtIndex:indexPath.row] : [contents objectAtIndex:indexPath.row];
     
-    NSString *query = [NSString stringWithFormat:@"type:%@|get", [type objectForKey:@"id"]];
+    NSString *query = [NSString stringWithFormat:@"type:%@|order_by:date_publish,DESC|limit:30|get", [type objectForKey:@"id"]];
     
     [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getRecordsByActiveQuery:query];
     

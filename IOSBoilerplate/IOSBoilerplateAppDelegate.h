@@ -30,6 +30,7 @@
 #import "Api.h"
 #import "LoginController.h"
 #import "TabsController.h"
+#import "NSString+HexColor.h"
 
 @interface IOSBoilerplateAppDelegate : NSObject <UIApplicationDelegate> {
 	Api *api;

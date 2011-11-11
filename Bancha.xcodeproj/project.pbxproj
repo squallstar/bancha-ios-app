@@ -98,6 +98,7 @@
 		E19F7D57146D163D005F151D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E19F7D56146D163D005F151D /* Icon@2x.png */; };
 		E19F7D5C146D212D005F151D /* RecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E19F7D5B146D212D005F151D /* RecordCell.xib */; };
 		E19F7D5F146D24F2005F151D /* RecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E19F7D5E146D24F2005F151D /* RecordCell.m */; };
+		E19F7D62146D3687005F151D /* NSString+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E19F7D61146D3687005F151D /* NSString+HexColor.m */; };
 		F87266BC145EF4E200B775D3 /* TwitterSearchClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F87266BB145EF4E200B775D3 /* TwitterSearchClient.m */; };
 /* End PBXBuildFile section */
 
@@ -268,6 +269,8 @@
 		E19F7D5B146D212D005F151D /* RecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RecordCell.xib; path = Bancha/RecordCell.xib; sourceTree = "<group>"; };
 		E19F7D5D146D24F2005F151D /* RecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordCell.h; sourceTree = "<group>"; };
 		E19F7D5E146D24F2005F151D /* RecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordCell.m; sourceTree = "<group>"; };
+		E19F7D60146D3687005F151D /* NSString+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HexColor.h"; sourceTree = "<group>"; };
+		E19F7D61146D3687005F151D /* NSString+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HexColor.m"; sourceTree = "<group>"; };
 		F87266BA145EF4E200B775D3 /* TwitterSearchClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterSearchClient.h; sourceTree = "<group>"; };
 		F87266BB145EF4E200B775D3 /* TwitterSearchClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterSearchClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -410,6 +413,8 @@
 				09E442CF141F97AE00AD2DAE /* ListViewController.m */,
 				F87266BA145EF4E200B775D3 /* TwitterSearchClient.h */,
 				F87266BB145EF4E200B775D3 /* TwitterSearchClient.m */,
+				E19F7D60146D3687005F151D /* NSString+HexColor.h */,
+				E19F7D61146D3687005F151D /* NSString+HexColor.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -746,6 +751,7 @@
 				82B5F6E4146C0BE300C97A53 /* ContentsController.m in Sources */,
 				82FB9F03146C298E008CF0AA /* RecordListController.m in Sources */,
 				E19F7D5F146D24F2005F151D /* RecordCell.m in Sources */,
+				E19F7D62146D3687005F151D /* NSString+HexColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

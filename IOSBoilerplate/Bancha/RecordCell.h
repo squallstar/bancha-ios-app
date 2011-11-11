@@ -10,8 +10,12 @@
 
 @interface RecordCell : UITableViewCell {
 	UILabel *title;
+	UIView *background;
 }
 
+-(void)setStage:(BOOL)stage;
+
 @property (nonatomic, retain) IBOutlet UILabel *title;
+@property (nonatomic, retain) IBOutlet UIView *background;
 
 @end
