@@ -7,11 +7,11 @@
 //
 
 #import "RecordListController.h"
-
+#import "ContentsController.h"
 
 @implementation RecordListController
 
-@synthesize records;
+@synthesize records, type, parent;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -53,6 +53,24 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    //We need to find the type of the first record
+    if ([records count]) {
+        int id_type = [[[records objectAtIndex:0] objectForKey:@"id_type"] intValue];
+
+        NSDictionary *ctypes = [(ContentsController*)parent types];
+        NSArray *keys = [ctypes allKeys];
+        
+        for (NSString *key in keys) {
+            NSDictionary *ctype = [ctypes objectForKey:key];            
+            if ([[ctype valueForKey:@"id"] intValue] == id_type) {
+                self.type = ctype;
+                NSLog(@"Current type is %@.", [ctype objectForKey:@"description"]);
+                break;
+            }
+        }
+    }
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -86,8 +104,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    // Return the number of rows in the section.
+    if (records != nil) {
+        return [records count];
+    }
     return 0;
 }
 
@@ -101,6 +120,9 @@
     }
     
     // Configure the cell...
+    
+    NSDictionary *record = [records objectAtIndex:indexPath.row];
+    cell.textLabel.text = [record objectForKey:[type objectForKey:@"edit_link"]];
     
     return cell;
 }

@@ -57,6 +57,8 @@
 		D8EA24CE145BA4AC00EB08B3 /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EA24CA145BA4AC00EB08B3 /* right.png */; };
 		D8EA24CF145BA4AC00EB08B3 /* right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EA24CB145BA4AC00EB08B3 /* right@2x.png */; };
 		E12A2FD81464279500E4249C /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12A2FD71464279500E4249C /* LoginController.m */; };
+		E13C0065146CAD13001A5D5C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E13C0064146CAD13001A5D5C /* Icon.png */; };
+		E13C0068146CAD17001A5D5C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E13C0067146CAD17001A5D5C /* Icon@2x.png */; };
 		E151040F1464394200CEF7C1 /* QBadgeElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E15103CB1464394200CEF7C1 /* QBadgeElement.m */; };
 		E15104101464394200CEF7C1 /* QBadgeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E15103CD1464394200CEF7C1 /* QBadgeTableCell.m */; };
 		E15104111464394200CEF7C1 /* QBooleanElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E15103CF1464394200CEF7C1 /* QBooleanElement.m */; };
@@ -184,6 +186,8 @@
 		D8EA24CB145BA4AC00EB08B3 /* right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right@2x.png"; sourceTree = "<group>"; };
 		E12A2FD61464279500E4249C /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		E12A2FD71464279500E4249C /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		E13C0064146CAD13001A5D5C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		E13C0067146CAD17001A5D5C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		E15103CA1464394200CEF7C1 /* QBadgeElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBadgeElement.h; sourceTree = "<group>"; };
 		E15103CB1464394200CEF7C1 /* QBadgeElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBadgeElement.m; sourceTree = "<group>"; };
 		E15103CC1464394200CEF7C1 /* QBadgeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBadgeTableCell.h; sourceTree = "<group>"; };
@@ -320,6 +324,8 @@
 		09885E851418F2E500CCE17A = {
 			isa = PBXGroup;
 			children = (
+				E13C0067146CAD17001A5D5C /* Icon@2x.png */,
+				E13C0064146CAD13001A5D5C /* Icon.png */,
 				E12A2FD51464276900E4249C /* Bancha */,
 				09885E9A1418F2E600CCE17A /* IOSBoilerplate */,
 				09885E931418F2E500CCE17A /* Frameworks */,
@@ -646,6 +652,8 @@
 				D8EA24CF145BA4AC00EB08B3 /* right@2x.png in Resources */,
 				E151043414643F9200CEF7C1 /* grain.gif in Resources */,
 				E15104361464408300CEF7C1 /* logo_shadow.png in Resources */,
+				E13C0065146CAD13001A5D5C /* Icon.png in Resources */,
+				E13C0068146CAD17001A5D5C /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,6 +758,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -765,6 +774,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -774,7 +784,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = "";
@@ -783,6 +794,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -791,6 +804,7 @@
 		09885EC91418F2E600CCE17A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOSBoilerplate/IOSBoilerplate-Prefix.pch";
 				GCC_VERSION = "";
@@ -804,6 +818,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = Bancha;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -811,6 +826,7 @@
 		09885ECA1418F2E600CCE17A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOSBoilerplate/IOSBoilerplate-Prefix.pch";
 				GCC_VERSION = "";
@@ -824,6 +840,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = Bancha;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

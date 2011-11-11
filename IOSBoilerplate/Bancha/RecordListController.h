@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface RecordListController : UITableViewController {
-    NSMutableArray *records;
+    NSDictionary *type;
+    NSArray *records;
+    id parent;
 }
 
-@property (nonatomic, retain) NSMutableArray *records;
+@property (nonatomic, retain) NSDictionary *type;
+@property (nonatomic, retain) NSArray *records;
+@property (nonatomic, assign) id parent;
 
 @end

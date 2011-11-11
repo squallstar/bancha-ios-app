@@ -71,6 +71,7 @@
 - (void)clearUserData {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"api_token"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"api_url"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"content_types"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

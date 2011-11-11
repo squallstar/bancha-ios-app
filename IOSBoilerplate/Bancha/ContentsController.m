@@ -7,7 +7,7 @@
 //
 
 #import "ContentsController.h"
-#import "IOSBoilerplateAppDelegate.h"
+
 
 @implementation ContentsController
 
@@ -74,7 +74,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] setDelegate:self];
     [super viewWillAppear:animated];
+    
+    if ([self.types count] == 0) {
+        [self fillContentTypes];
+    }
+    
     [self.tableView reloadData];
 }
 
@@ -140,6 +146,21 @@
     cell.textLabel.text = [item objectForKey:@"description"];
     
     return cell;
+}
+
+-(void)recordsObtained:(NSArray *)records forActiveQuery:(NSString *)typeName {
+    if (![records count]) {
+        UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No records found!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [al show];
+        [al release];
+        return;
+    }
+    
+    RecordListController *recordList = [[RecordListController alloc] initWithStyle:UITableViewStylePlain];
+    [recordList setRecords:records];
+    [recordList setParent:self];
+    
+    [self.navigationController pushViewController:recordList animated:YES];
 }
 
 /*

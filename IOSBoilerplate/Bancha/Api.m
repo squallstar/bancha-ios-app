@@ -21,6 +21,9 @@
     } else {
         self.client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@""]];
     }	
+    
+    [self.client setStringEncoding:NSUTF8StringEncoding];
+    [self.client setParameterEncoding:AFFormURLParameterEncoding];
 	
 	return self;
 }
@@ -37,21 +40,23 @@
     NSString *baseUrl = [NSString stringWithFormat:@"http://%@/api/", trimmedUri];
     
 	self.client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
+    [self.client setStringEncoding:NSUTF8StringEncoding];
+    [self.client setParameterEncoding:AFFormURLParameterEncoding];
 	
-	NSURLRequest *request = [self.client requestWithMethod:@"GET" path:@"login" parameters:[NSDictionary dictionaryWithObjectsAndKeys:username, @"username", password, @"password", nil]];
+	NSURLRequest *request = [self.client requestWithMethod:@"POST" path:@"login" parameters:[NSDictionary dictionaryWithObjectsAndKeys:username, @"username", password, @"password", nil]];
 
 	AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 
 		NSString *msg = [JSON valueForKeyPath:@"message"];
 		if ([msg isEqualToString:@"USER_PWD_WRONG"]) {
-			
+			NSLog(@"%@", JSON);
 			UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username or password wrong." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 			[al show];
 			[al release];
             
             [delegate loginFinished:NO];
 			
-		} else {
+		} else if ([msg isEqualToString:@"OK"]) {
 			//Success!
             NSString *token = [[JSON valueForKeyPath:@"data"] valueForKeyPath:@"token"];
             
@@ -77,18 +82,21 @@
 
 -(void)getContentTypes {
     
-    NSURLRequest *request = [self.client requestWithMethod:@"GET" path:@"types" parameters:[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"], @"token", nil]];
-    
-    NSLog(@"using token %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"]);
+    NSURLRequest *request = [self.client requestWithMethod:@"POST" path:@"types" parameters:[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"], @"token", nil]];
     
 	AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
 		NSString *msg = [JSON valueForKeyPath:@"message"];
 		if (![msg isEqualToString:@"OK"]) {
 			
-			UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot receive the Content types." delegate:nil cancelButtonTitle:@"Try later" otherButtonTitles:nil];
-			[al show];
-			[al release];
+            
+            if ([msg isEqualToString:@"BAD_TOKEN"]) {
+                [self tokenInvalidScript];
+            } else {
+                UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot receive the Content types." delegate:nil cancelButtonTitle:@"Try later" otherButtonTitles:nil];
+                [al show];
+                [al release];
+            }
 			
 		} else {
 			//Success!
@@ -99,7 +107,6 @@
              NSLog(@"Content types has been renewed with %i types.", [[types allKeys] count]);
             [delegate typesFinished:YES];
 		}
-		
 		
 	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
 		NSLog(@"%@", error);
@@ -112,9 +119,8 @@
 }
 
 -(void)getRecordsByActiveQuery:(NSString*)activeQuery {
-    NSURLRequest *request = [self.client requestWithMethod:@"GET" path:@"records" parameters:[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"], @"token", activeQuery, @"query", nil]];
-    
-    NSLog(@"%@", [[request URL] query]);
+    NSLog(@"calling mama with token %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"]);
+    NSURLRequest *request = [self.client requestWithMethod:@"POST" path:@"records" parameters:[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"], @"token", activeQuery, @"query", nil]];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSLog(@"%@", JSON);
@@ -125,22 +131,20 @@
 			[al show];
 			[al release];
 			
-		} else if ([msg isEqualToString:@"NO_RECORDS"]) {
-			
-			UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No records found!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-			[al show];
-			[al release];
-            
-            [delegate recordsObtained:[NSArray array] forActiveQuery:activeQuery];
-			
+		} else if ([msg isEqualToString:@"NO_RECORDS"]) {            
+            if (delegate != nil) {
+                [delegate recordsObtained:[NSArray array] forActiveQuery:activeQuery];
+            }			
 		} else if ([msg isEqualToString:@"OK"]) {
 			//Success!
-            NSArray *records = [JSON objectForKey:@"data"];
+            NSArray *records = [[JSON objectForKey:@"data"] objectForKey:@"records"];
             
             NSLog(@"Obtained %i records.", [records count]);
-            [delegate recordsObtained:records forActiveQuery:activeQuery];
+            if (delegate != nil) {
+                [delegate recordsObtained:records forActiveQuery:activeQuery];
+            }
 		} else if ([msg isEqualToString:@"BAD_TOKEN"]) {      
-            //[self tokenInvalidScript];
+            [self tokenInvalidScript];
 		}
 		
 		

@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Constants.h"
+#import "IOSBoilerplateAppDelegate.h"
+#import "RecordListController.h"
 
-@interface ContentsController : UITableViewController {
+@interface ContentsController : UITableViewController <ApiDelegate> {
     Structure structure;
     NSMutableArray *pages;
     NSMutableArray *contents;

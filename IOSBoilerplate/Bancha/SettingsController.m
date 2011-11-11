@@ -27,6 +27,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self loading:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
