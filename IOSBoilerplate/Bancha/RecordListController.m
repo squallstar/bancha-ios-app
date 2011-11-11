@@ -11,7 +11,7 @@
 
 @implementation RecordListController
 
-@synthesize records, type, parent;
+@synthesize records, type, parent, cellNib;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -112,17 +112,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	/*
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    // Configure the cell...
+    }*/
+	
+	static NSString *CellIdentifier = @"RecordCell";
+	RecordCell *cell = (RecordCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+		cell = (RecordCell *)[nib objectAtIndex:0];
+	}
     
     NSDictionary *record = [records objectAtIndex:indexPath.row];
-    cell.textLabel.text = [record objectForKey:[type objectForKey:@"edit_link"]];
+    cell.title.text = [record objectForKey:[type objectForKey:@"edit_link"]];
+	
+	//First Row: 
     
     return cell;
 }
@@ -165,6 +173,10 @@
     return YES;
 }
 */
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 70.0;
+}
 
 #pragma mark - Table view delegate
 

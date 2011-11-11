@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RecordCell.h"
 
 @interface RecordListController : UITableViewController {
     NSDictionary *type;
     NSArray *records;
     id parent;
+	RecordCell *cellNib;
 }
 
 @property (nonatomic, retain) NSDictionary *type;
 @property (nonatomic, retain) NSArray *records;
 @property (nonatomic, assign) id parent;
+@property (nonatomic, retain) IBOutlet RecordCell *cellNib;
 
 @end
