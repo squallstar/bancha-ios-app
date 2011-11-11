@@ -11,7 +11,7 @@
 
 @implementation RecordListController
 
-@synthesize records, type, parent, cellNib;
+@synthesize records, type, parent, cellNib, searchBar;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -39,8 +39,14 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    selectedIndexes = [[NSMutableDictionary alloc] init];
+	
+	UIBarButtonItem *new = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewRecord)];
+	
+	self.navigationItem.rightBarButtonItem = new;
+	searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+	self.tableView.tableHeaderView = searchBar;
+	
 }
 
 - (void)viewDidUnload
@@ -69,6 +75,7 @@
                 break;
             }
         }
+		self.title = [self.type objectForKey:@"description"];
     }
     [self.tableView reloadData];
 }
@@ -127,16 +134,34 @@
 		cell = (RecordCell *)[nib objectAtIndex:0];
 	}
     
+	[cell setClipsToBounds:YES];
+	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+	
     NSDictionary *record = [records objectAtIndex:indexPath.row];
     cell.title.text = [record objectForKey:[type objectForKey:@"edit_link"]];
 	
 	if (![record objectForKey:@"published"]) {
 		[cell setStage:YES];
+	} else {
+		[cell setStage:NO];
 	}
 	
 	//First Row: 
+	NSMutableString *first = [[NSMutableString alloc] init];
+	if ([record objectForKey:@"lang"]) {
+		[first appendFormat:@"Language: %@", [[record objectForKey:@"lang"] uppercaseString]];
+	}
+	if ([record objectForKey:@"date_publish"]) {
+		[first appendFormat:@" - Published on %@", [record objectForKey:@"date_publish"]];
+	}
+	
+	[[cell firstLine] setText:first];
     
     return cell;
+}
+
+-(void)addNewRecord {
+	
 }
 
 /*
@@ -179,6 +204,12 @@
 */
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	// If our cell is selected, return double height
+    if([self cellIsSelected:indexPath]) {
+        return 110.0;
+    }
+	
 	return 70.0;
 }
 
@@ -186,14 +217,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    // Deselect cell
+    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
+	
+    // Toggle 'selected' state
+    BOOL isSelected = ![self cellIsSelected:indexPath];
+	
+    // Store cell 'selected' state keyed on indexPath
+    NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
+	[selectedIndexes removeAllObjects];
+    [selectedIndexes setObject:selectedIndex forKey:indexPath]; 
+	
+    // This is where magic happens...
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+}
+
+- (BOOL)cellIsSelected:(NSIndexPath *)indexPath {
+	// Return whether the cell at the specified index path is selected or not
+	NSNumber *selectedIndex = [selectedIndexes objectForKey:indexPath];
+	return selectedIndex == nil ? FALSE : [selectedIndex boolValue];
 }
 
 @end

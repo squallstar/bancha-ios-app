@@ -49,7 +49,7 @@
 
 		NSString *msg = [JSON valueForKeyPath:@"message"];
 		if ([msg isEqualToString:@"USER_PWD_WRONG"]) {
-			NSLog(@"%@", JSON);
+
 			UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username or password wrong." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 			[al show];
 			[al release];
@@ -119,11 +119,10 @@
 }
 
 -(void)getRecordsByActiveQuery:(NSString*)activeQuery {
-    NSLog(@"calling mama with token %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"]);
     NSURLRequest *request = [self.client requestWithMethod:@"POST" path:@"records" parameters:[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"], @"token", activeQuery, @"query", nil]];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"%@", JSON);
+
 		NSString *msg = [JSON valueForKeyPath:@"message"];
 		if ([msg isEqualToString:@"BAD_QUERY"]) {
 			

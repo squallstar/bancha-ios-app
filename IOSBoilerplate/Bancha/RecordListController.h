@@ -14,11 +14,17 @@
     NSArray *records;
     id parent;
 	RecordCell *cellNib;
+	UISearchBar *searchBar;
+	NSMutableDictionary *selectedIndexes;
 }
+
+-(void)addNewRecord;
+- (BOOL)cellIsSelected:(NSIndexPath *)indexPath;
 
 @property (nonatomic, retain) NSDictionary *type;
 @property (nonatomic, retain) NSArray *records;
 @property (nonatomic, assign) id parent;
 @property (nonatomic, retain) IBOutlet RecordCell *cellNib;
+@property (nonatomic, retain) UISearchBar *searchBar;
 
 @end
