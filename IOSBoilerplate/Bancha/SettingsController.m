@@ -38,15 +38,11 @@
 - (void)updateTypes:(QButtonElement *)buttonElement {
     [self loading:YES];
     [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] setDelegate:self];
-    
     [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getContentTypes];
 }
 
 -(void)typesFinished:(BOOL)success {
     [self loading:NO];
-    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Update" message:@"Content types have been renewed." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-    [alert show];
-    [alert release];*/
 }
 
 
