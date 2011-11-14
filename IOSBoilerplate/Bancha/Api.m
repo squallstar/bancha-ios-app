@@ -70,6 +70,11 @@
 		
 	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
 		NSLog(@"%@", error);
+		
+		UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Bancha not found" message:@"Bancha doesn't exist at the given location.\r\n\r\nPlease be sure to include also the administration path." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+		[al show];
+		[al release];
+		
         [delegate loginFinished:NO];
 	}];
 	
@@ -102,9 +107,21 @@
 			//Success!
             NSDictionary *types = [JSON objectForKey:@"data"];
             [[NSUserDefaults standardUserDefaults] setObject:types forKey:@"content_types"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            
             
              NSLog(@"Content types has been renewed with %i types.", [[types allKeys] count]);
+			
+			
+			
+			NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+			[formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+			
+			NSString *dateString = [formatter stringFromDate:[NSDate date]];
+			[[NSUserDefaults standardUserDefaults] setObject:dateString forKey:@"content_types_update"];
+			[formatter release];
+			
+			[[NSUserDefaults standardUserDefaults] synchronize];
+			
             [delegate typesFinished:YES];
 		}
 		
@@ -145,13 +162,17 @@
 		} else if ([msg isEqualToString:@"BAD_TOKEN"]) {      
             [self tokenInvalidScript];
 		}
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 		
 		
 	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
 		NSLog(@"%@", error);
-        [delegate typesFinished:NO];
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        [delegate recordsObtained:[NSArray array] forActiveQuery:activeQuery];
 	}];
     
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+	
     NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
 	[queue addOperation:operation];
 }
