@@ -9,6 +9,9 @@
 #import "RecordListController.h"
 #import "ContentsController.h"
 
+#define OPEN_HEIGHT 88.0f
+#define CLOSE_HEIGHT 55.0f
+
 @implementation RecordListController
 
 @synthesize records, type, parent, cellNib, searchBar;
@@ -46,6 +49,9 @@
 	self.navigationItem.rightBarButtonItem = new;
 	searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
 	self.tableView.tableHeaderView = searchBar;
+	[searchBar setDelegate:self];
+	
+	[searchBar setPlaceholder:@"Search by title"];
 	
 }
 
@@ -59,6 +65,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+	
+	clickedEditCell = FALSE;
     
     //We need to find the type of the first record
     if ([records count]) {
@@ -118,27 +126,21 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	/*
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }*/
-	
+{	
 	static NSString *CellIdentifier = @"RecordCell";
 	RecordCell *cell = (RecordCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
 		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
 		cell = (RecordCell *)[nib objectAtIndex:0];
+		
+		[cell setDelegate:self];
+		[cell setClipsToBounds:YES];
+		[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 	}
-    
-	[cell setClipsToBounds:YES];
-	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 	
     NSDictionary *record = [records objectAtIndex:indexPath.row];
     cell.title.text = [record objectForKey:[type objectForKey:@"edit_link"]];
+	cell.record_id = [[record objectForKey:[type objectForKey:@"primary_key"]] intValue];
 	
 	if (![record objectForKey:@"published"]) {
 		[cell setStage:YES];
@@ -164,53 +166,15 @@
 	
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	// If our cell is selected, return double height
     if([self cellIsSelected:indexPath]) {
-        return 110.0;
+        return OPEN_HEIGHT;
     }
 	
-	return 70.0;
+	return CLOSE_HEIGHT;
 }
 
 #pragma mark - Table view delegate
@@ -237,6 +201,67 @@
 	// Return whether the cell at the specified index path is selected or not
 	NSNumber *selectedIndex = [selectedIndexes objectForKey:indexPath];
 	return selectedIndex == nil ? FALSE : [selectedIndex boolValue];
+}
+
+#pragma mark - Record cell delegate
+
+-(void)cellClickedEditButton:(int)record_id {
+	clickedEditCell = TRUE;
+	[[[IOSBoilerplateAppDelegate sharedAppDelegate] api] setDelegate:self];
+	
+	NSString *query = [NSString stringWithFormat:@"type:%@|documents:TRUE|where:%@,%i|limit:1|get", [type objectForKey:@"id"], [type objectForKey:@"primary_key"], record_id];
+    
+    [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getRecordsByActiveQuery:query];
+}
+
+#pragma mark - search bar
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchB {
+	[searchB resignFirstResponder];
+	
+	[[[IOSBoilerplateAppDelegate sharedAppDelegate] api] setDelegate:self];
+	
+	NSString *query = [NSString stringWithFormat:@"type:%@|like:title,%@|order_by:date_publish,DESC|set_list:TRUE|limit:%i|get", [type objectForKey:@"id"], [searchB text], API_RECORD_RESULTS];
+    
+    [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getRecordsByActiveQuery:query];
+
+}
+
+
+
+- (void)searchBar:(UISearchBar *)bar textDidChange:(NSString *)searchText {
+    if(![searchBar isFirstResponder]) {
+        // user tapped the 'clear' button
+        shouldBeginEditing = NO;
+        // do whatever I want to happen when the user clears the search...
+		
+		
+		[[[IOSBoilerplateAppDelegate sharedAppDelegate] api] setDelegate:self];
+		
+		NSString *query = [NSString stringWithFormat:@"type:%@|set_list:TRUE|order_by:date_publish,DESC|limit:%i|get", [type objectForKey:@"id"], API_RECORD_RESULTS];
+		
+		
+		
+		[[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getRecordsByActiveQuery:query];
+    }
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar {
+    // reset the shouldBeginEditing BOOL ivar to YES, but first take its value and use it to return it from the method call
+    BOOL boolToReturn = shouldBeginEditing;
+    shouldBeginEditing = YES;
+    return boolToReturn;
+}
+
+-(void)recordsObtained:(NSArray *)recs forActiveQuery:(NSString *)typeName {
+	if (!clickedEditCell) {
+		self.records = recs;
+		[self.tableView reloadData];
+	} else {
+		//Edit button clicked on a cell
+		clickedEditCell = FALSE;
+		NSLog(@"%@", recs);
+	}
 }
 
 @end

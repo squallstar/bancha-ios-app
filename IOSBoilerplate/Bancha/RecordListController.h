@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "RecordCell.h"
+#import "Api.h"
 
-@interface RecordListController : UITableViewController {
+@interface RecordListController : UITableViewController <ApiDelegate, RecordCellDelegate, UISearchBarDelegate> {
     NSDictionary *type;
     NSArray *records;
     id parent;
 	RecordCell *cellNib;
 	UISearchBar *searchBar;
 	NSMutableDictionary *selectedIndexes;
+	BOOL shouldBeginEditing;
+	BOOL clickedEditCell;
 }
 
 -(void)addNewRecord;
