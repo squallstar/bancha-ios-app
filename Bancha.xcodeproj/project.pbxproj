@@ -56,6 +56,10 @@
 		D8EA24CD145BA4AC00EB08B3 /* left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EA24C9145BA4AC00EB08B3 /* left@2x.png */; };
 		D8EA24CE145BA4AC00EB08B3 /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EA24CA145BA4AC00EB08B3 /* right.png */; };
 		D8EA24CF145BA4AC00EB08B3 /* right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8EA24CB145BA4AC00EB08B3 /* right@2x.png */; };
+		E104C89F147168BA000F9065 /* pen_alt_stroke_12x12.png in Resources */ = {isa = PBXBuildFile; fileRef = E104C89E147168BA000F9065 /* pen_alt_stroke_12x12.png */; };
+		E104C8A214716990000F9065 /* document_stroke_16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = E104C8A014716990000F9065 /* document_stroke_16x16.png */; };
+		E104C8A314716990000F9065 /* trash_stroke_12x12.png in Resources */ = {isa = PBXBuildFile; fileRef = E104C8A114716990000F9065 /* trash_stroke_12x12.png */; };
+		E104C8A6147171C0000F9065 /* RecordEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = E104C8A5147171C0000F9065 /* RecordEditController.m */; };
 		E12A2FD81464279500E4249C /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12A2FD71464279500E4249C /* LoginController.m */; };
 		E151040F1464394200CEF7C1 /* QBadgeElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E15103CB1464394200CEF7C1 /* QBadgeElement.m */; };
 		E15104101464394200CEF7C1 /* QBadgeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E15103CD1464394200CEF7C1 /* QBadgeTableCell.m */; };
@@ -187,6 +191,11 @@
 		D8EA24C9145BA4AC00EB08B3 /* left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left@2x.png"; sourceTree = "<group>"; };
 		D8EA24CA145BA4AC00EB08B3 /* right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right.png; sourceTree = "<group>"; };
 		D8EA24CB145BA4AC00EB08B3 /* right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right@2x.png"; sourceTree = "<group>"; };
+		E104C89E147168BA000F9065 /* pen_alt_stroke_12x12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pen_alt_stroke_12x12.png; path = IOSBoilerplate/pen_alt_stroke_12x12.png; sourceTree = SOURCE_ROOT; };
+		E104C8A014716990000F9065 /* document_stroke_16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = document_stroke_16x16.png; path = IOSBoilerplate/document_stroke_16x16.png; sourceTree = SOURCE_ROOT; };
+		E104C8A114716990000F9065 /* trash_stroke_12x12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trash_stroke_12x12.png; path = IOSBoilerplate/trash_stroke_12x12.png; sourceTree = SOURCE_ROOT; };
+		E104C8A4147171BF000F9065 /* RecordEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordEditController.h; sourceTree = "<group>"; };
+		E104C8A5147171C0000F9065 /* RecordEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordEditController.m; sourceTree = "<group>"; };
 		E12A2FD61464279500E4249C /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		E12A2FD71464279500E4249C /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		E15103CA1464394200CEF7C1 /* QBadgeElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBadgeElement.h; sourceTree = "<group>"; };
@@ -454,6 +463,8 @@
 				82B5F6E3146C0BE300C97A53 /* ContentsController.m */,
 				82FB9F01146C298E008CF0AA /* RecordListController.h */,
 				82FB9F02146C298E008CF0AA /* RecordListController.m */,
+				E104C8A4147171BF000F9065 /* RecordEditController.h */,
+				E104C8A5147171C0000F9065 /* RecordEditController.m */,
 				E19F7D5D146D24F2005F151D /* RecordCell.h */,
 				E19F7D5E146D24F2005F151D /* RecordCell.m */,
 			);
@@ -582,6 +593,9 @@
 		E19F7D4F146D15FD005F151D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E104C8A014716990000F9065 /* document_stroke_16x16.png */,
+				E104C8A114716990000F9065 /* trash_stroke_12x12.png */,
+				E104C89E147168BA000F9065 /* pen_alt_stroke_12x12.png */,
 				E151043314643F9200CEF7C1 /* grain.gif */,
 				E15104351464408300CEF7C1 /* logo_shadow.png */,
 				09E442BE141F970400AD2DAE /* blackArrow.png */,
@@ -676,6 +690,9 @@
 				E19F7D55146D1639005F151D /* Icon.png in Resources */,
 				E19F7D57146D163D005F151D /* Icon@2x.png in Resources */,
 				E19F7D5C146D212D005F151D /* RecordCell.xib in Resources */,
+				E104C89F147168BA000F9065 /* pen_alt_stroke_12x12.png in Resources */,
+				E104C8A214716990000F9065 /* document_stroke_16x16.png in Resources */,
+				E104C8A314716990000F9065 /* trash_stroke_12x12.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,6 +769,7 @@
 				82FB9F03146C298E008CF0AA /* RecordListController.m in Sources */,
 				E19F7D5F146D24F2005F151D /* RecordCell.m in Sources */,
 				E19F7D62146D3687005F151D /* NSString+HexColor.m in Sources */,
+				E104C8A6147171C0000F9065 /* RecordEditController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
