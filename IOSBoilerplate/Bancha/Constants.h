@@ -7,6 +7,7 @@
 //
 
 extern NSString * const API_URL;
+extern int const API_RECORD_RESULTS;
 
 typedef enum {
 	StructureTree = 0,
