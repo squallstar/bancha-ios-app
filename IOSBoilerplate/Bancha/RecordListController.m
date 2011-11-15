@@ -8,6 +8,8 @@
 
 #import "RecordListController.h"
 #import "ContentsController.h"
+#import "RecordEditController.h"
+#import "RecordEditNavigationController.h"
 
 #define OPEN_HEIGHT 88.0f
 #define CLOSE_HEIGHT 55.0f
@@ -260,7 +262,15 @@
 	} else {
 		//Edit button clicked on a cell
 		clickedEditCell = FALSE;
-		NSLog(@"%@", recs);
+		
+		NSDictionary *record = [recs objectAtIndex:0];
+		
+		RecordEditNavigationController *editNav = [[RecordEditNavigationController alloc] initWithRootViewController:[RecordEditController controllerForRoot:[RecordEditController createFormForContentType:type andRecord:record]]];
+	
+		[editNav setType:self.type];
+		[editNav setRecord:[NSDictionary dictionaryWithDictionary:record]];
+		
+		[self presentModalViewController:editNav animated:YES];
 	}
 }
 

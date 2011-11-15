@@ -21,14 +21,16 @@
 	return (IOSBoilerplateAppDelegate*) [UIApplication sharedApplication].delegate;
 }
 
+
 - (BOOL)openURL:(NSURL*)url
 {
-    BrowserViewController *bvc = [[BrowserViewController alloc] initWithUrls:url];
-    //[self.navigationController pushViewController:bvc animated:YES];
-    [bvc release];
+    /*BrowserViewController *bvc = [[BrowserViewController alloc] initWithUrls:url];
+    [self.navigationController pushViewController:bvc animated:YES];
+    [bvc release];*/
     
     return YES;
 }
+ 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
