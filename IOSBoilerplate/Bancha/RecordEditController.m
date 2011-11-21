@@ -8,6 +8,8 @@
 
 #import "RecordEditController.h"
 #import "RecordEditNavigationController.h"
+#import "IOSBoilerplateAppDelegate.h"
+
 @interface RecordEditController ()
 
 @end
@@ -23,6 +25,7 @@
     self.tableView.bounces = NO;
     ((QuickDialogTableView *)self.tableView).styleProvider = self;
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -117,6 +120,7 @@
 				}
 			
 				if (input != nil) {
+					[input setKey:fieldName];
 					[mainSection addElement:input];
 				}
 				
@@ -127,8 +131,6 @@
 				if (![options isKindOfClass:[NSDictionary class]]) {
 					continue;
 				}
-				
-			
 				
 				int selectedOption = 0;
 				int i = 0;
@@ -144,13 +146,11 @@
 					}
 				}
 				
-				QRadioElement *select = [[QRadioElement alloc] initWithItems:[options allValues] selected:selectedOption];
+				QRadioElement *select = [[QRadioElement alloc] initWithItems:[[options allValues]retain] selected:selectedOption];
+				[select setGrouped:YES];
 				[select setTitle:description];
 				[mainSection addElement:select];
-				
 			}
-			
-			
 		}
 		
 		[root addSection:mainSection];
@@ -161,13 +161,21 @@
 }
 
 -(void)openSection:(QButtonElement*)fieldset {
+	
 	RecordEditNavigationController *parent = (RecordEditNavigationController*)self.navigationController;
 	
-	QRootElement *fieldsetRoot = [RecordEditController createFieldsetWithName:fieldset.title andContentType:parent.type usingRecord:parent.record];
-	
-	QuickDialogController *c = [QuickDialogController controllerForRoot:fieldsetRoot];
-	[self.navigationController pushViewController:c animated:YES];
-	
+	if ([parent.sections objectForKey:fieldset.title] != nil) {
+		//Already present
+		[self.navigationController pushViewController:[parent.sections objectForKey:fieldset.title] animated:YES];
+	} else {
+		//Not found. Let's create a new section
+		QRootElement *fieldsetRoot = [RecordEditController createFieldsetWithName:fieldset.title andContentType:parent.type usingRecord:parent.record];
+		
+		QuickDialogController *c = [QuickDialogController controllerForRoot:fieldsetRoot];
+		[parent.sections setObject:c forKey:fieldset.title];
+
+		[self.navigationController pushViewController:c animated:YES];
+	}	
 }
 
 #pragma mark - Save and cancel data
@@ -181,20 +189,58 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	
+	RecordEditNavigationController *parent = (RecordEditNavigationController*)self.navigationController;
+	NSMutableDictionary *fieldsToSave = [[NSMutableDictionary alloc] init];
+	
 	switch (buttonIndex) {
 		case 0:
 			//Discard
 			[self dismissModalViewControllerAnimated:YES];
 			break;
+			
 		case 1:
 			//Save
-			break;
 		case 2:
-			//Save and go to list
+			//Save and publish
+			for (QuickDialogController *c in [parent.sections allValues]) {
+				QSection *sect = [c.root getSectionForIndex:0];
+				//NSLog(@"TYPE %@", [parent type]);
+				for (QElement *el in [sect elements]) {
+					
+					if (el.key == nil) continue;
+					
+					//We try to get the type of this field
+					NSDictionary *field = [[[parent type] objectForKey:@"fields"] objectForKey:el.key];
+					
+					if ([[field objectForKey:@"type"] isEqualToString:@"text"]) {
+						NSString *val = [(QEntryElement*)el textValue];
+						if (val == nil) {
+							val = @"";
+						}
+						[fieldsToSave setObject:val forKey:el.key];
+					}
+					
+				}
+			}
+			
+			if ([fieldsToSave count]) {
+				//Saving
+				[self loading:YES];	
+				
+				[[[IOSBoilerplateAppDelegate sharedAppDelegate] api] setDelegate:self];
+				[[[IOSBoilerplateAppDelegate sharedAppDelegate] api] updateRecordWithId:[parent.record objectForKey:[parent.type objectForKey:@"primary_key"]] ofContentType:[[parent.type objectForKey:@"id"] intValue] updateFields:fieldsToSave publish:(buttonIndex == 2 ? YES : TRUE)];
+			}
+			
+			break;
+			
 		case 3:
 			//Nothing
 			break;
 	}
+}
+
+-(void)updateFinished:(BOOL)success {
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Api.h"
 
-@interface RecordEditController : QuickDialogController  <QuickDialogStyleProvider, ApiDelegate, UIActionSheetDelegate> 
+@interface RecordEditController : QuickDialogController  <QuickDialogStyleProvider, ApiDelegate, UIActionSheetDelegate>
 
 -(void)showActions;
 -(void)openSection:(QButtonElement*)fieldset;
@@ -17,6 +17,8 @@
 + (QRootElement *)createFormForContentType:(NSDictionary*)content_type andRecord:(NSDictionary*)record;
 
 + (QRootElement*)createFieldsetWithName:(NSString*)fieldSetName andContentType:(NSDictionary*)content_type usingRecord:(NSDictionary*)record;
+
+
 
 
 @end
