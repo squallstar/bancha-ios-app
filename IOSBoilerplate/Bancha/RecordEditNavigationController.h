@@ -10,10 +10,12 @@
 
 @interface RecordEditNavigationController : UINavigationController {
 	NSDictionary *type;
+	NSMutableDictionary *sections;
 	NSDictionary *record;
 }
 
 @property (nonatomic, retain) NSDictionary *type;
 @property (nonatomic, retain) NSDictionary *record;
+@property (nonatomic, retain) NSMutableDictionary *sections;
 
 @end
