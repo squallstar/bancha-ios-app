@@ -177,6 +177,51 @@
 	[queue addOperation:operation];
 }
 
+-(void)updateRecordWithId:(NSString*)id_record ofContentType:(int)type_id updateFields:(NSDictionary*)data publish:(BOOL)pub {
+	
+	//Prepare data
+	NSMutableDictionary *postData = [NSMutableDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"], @"token", nil];
+	[postData addEntriesFromDictionary:data];
+	[postData setObject:[NSString stringWithFormat:@"%i", type_id] forKey:@"_type"];
+	[postData setObject:id_record forKey:@"_id"];
+	
+	//1.Save
+	NSURLRequest *request = [self.client requestWithMethod:@"POST" path:@"record/update" parameters:postData];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+		
+		NSString *msg = [JSON valueForKeyPath:@"message"];
+		if ([msg isEqualToString:@"OK"]) {
+			//Success!
+			
+			if (pub) {
+				//2. Publish
+			}
+		} else if ([msg isEqualToString:@"BAD_TOKEN"]) {      
+            [self tokenInvalidScript];
+		} else {
+			
+			UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot update!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+			[al show];
+			[al release];
+			
+		}
+		[delegate updateFinished:YES];
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+		
+		
+	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+		NSLog(@"%@", error);
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        [delegate updateFinished:YES];
+	}];
+    
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+	
+    NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
+	[queue addOperation:operation];
+}
+
 -(void)tokenInvalidScript {
     NSLog(@"Token invalid. Logging out!");
     

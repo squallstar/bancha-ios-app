@@ -14,6 +14,7 @@
 @optional
 -(void)loginFinished:(BOOL)success;
 -(void)typesFinished:(BOOL)success;
+-(void)updateFinished:(BOOL)success;
 -(void)recordsObtained:(NSArray*)records forActiveQuery:(NSString*)typeName;
 @end
 
@@ -28,6 +29,7 @@
 -(BOOL)loginToPath:(NSString*)adminPath withUsername:(NSString*)username andPassword:(NSString*)password;
 -(void)getContentTypes;
 -(void)getRecordsByActiveQuery:(NSString*)activeQuery;
+-(void)updateRecordWithId:(NSString*)id_record ofContentType:(int)type_id updateFields:(NSDictionary*)data publish:(BOOL)pub;
 -(void)tokenInvalidScript;
 
 @end
