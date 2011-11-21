@@ -268,6 +268,7 @@
 		RecordEditNavigationController *editNav = [[RecordEditNavigationController alloc] initWithRootViewController:[RecordEditController controllerForRoot:[RecordEditController createFormForContentType:type andRecord:record]]];
 	
 		[editNav setType:self.type];
+		[[editNav sections] removeAllObjects];
 		[editNav setRecord:[NSDictionary dictionaryWithDictionary:record]];
 		
 		[self presentModalViewController:editNav animated:YES];
