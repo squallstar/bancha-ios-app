@@ -107,6 +107,17 @@
 		F87266BC145EF4E200B775D3 /* TwitterSearchClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F87266BB145EF4E200B775D3 /* TwitterSearchClient.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		E1FCEC17147A8B5E0095528A /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
 		0927075D141E4C7800E778AE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0927075F141E4E2B00E778AE /* StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringHelper.h; sourceTree = "<group>"; };
@@ -636,6 +647,7 @@
 				09885E8E1418F2E500CCE17A /* Resources */,
 			);
 			buildRules = (
+				E1FCEC17147A8B5E0095528A /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
