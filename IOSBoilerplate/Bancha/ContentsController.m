@@ -11,16 +11,9 @@
 
 @implementation ContentsController
 
-@synthesize structure, pages, contents, types, alert;
+@synthesize structure, pages, contents, types, alert, tableView;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -53,11 +46,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	[self.view setAutoresizesSubviews:YES];
     
     self.title = @"Content types";
  
     pages = [[NSMutableArray alloc] initWithCapacity:10];
     contents = [[NSMutableArray alloc] initWithCapacity:30];
+	
+	tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+	[tableView setDataSource:self];
+	[tableView setDelegate:self];
+	
+	[tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+	
+	[self.view addSubview:self.tableView];	
     
     [self fillContentTypes];
 }
@@ -120,7 +122,7 @@
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView2 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
@@ -146,7 +148,7 @@
         return;
     }
     
-    RecordListController *recordList = [[RecordListController alloc] initWithStyle:UITableViewStylePlain];
+    RecordListController *recordList = [[RecordListController alloc] init];
     [recordList setRecords:records];
     [recordList setParent:self];
     

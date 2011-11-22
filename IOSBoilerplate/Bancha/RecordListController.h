@@ -11,7 +11,7 @@
 #import "Api.h"
 #import "SideAlert.h"
 
-@interface RecordListController : UITableViewController <ApiDelegate, RecordCellDelegate, UISearchBarDelegate> {
+@interface RecordListController : UIViewController <ApiDelegate, RecordCellDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource> {
     NSDictionary *type;
     NSArray *records;
     id parent;
@@ -21,11 +21,13 @@
 	BOOL shouldBeginEditing;
 	BOOL clickedEditCell;
 	SideAlert *alert;
+	UITableView *tableView;
 }
 
 -(void)addNewRecord;
 - (BOOL)cellIsSelected:(NSIndexPath *)indexPath;
 
+@property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSDictionary *type;
 @property (nonatomic, retain) NSArray *records;
 @property (nonatomic, assign) id parent;

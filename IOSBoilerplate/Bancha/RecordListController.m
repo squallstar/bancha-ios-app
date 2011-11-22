@@ -16,16 +16,8 @@
 
 @implementation RecordListController
 
-@synthesize records, type, parent, cellNib, searchBar, alert;
+@synthesize records, type, parent, cellNib, searchBar, alert, tableView;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -40,6 +32,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+	[tableView setDataSource:self];
+	[tableView setDelegate:self];
+	
+	[tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+	
+	[self.view addSubview:self.tableView];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -134,7 +134,7 @@
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView2 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {	
 	static NSString *CellIdentifier = @"RecordCell";
 	RecordCell *cell = (RecordCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -188,7 +188,7 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView2 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Deselect cell
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];

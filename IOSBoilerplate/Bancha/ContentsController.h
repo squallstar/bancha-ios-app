@@ -12,12 +12,13 @@
 #import "RecordListController.h"
 #import "SideAlert.h"
 
-@interface ContentsController : UITableViewController <ApiDelegate> {
+@interface ContentsController : UIViewController <ApiDelegate, UITableViewDelegate, UITableViewDataSource> {
     Structure structure;
     NSMutableArray *pages;
     NSMutableArray *contents;
     NSDictionary *types;
 	SideAlert *alert;
+	UITableView *tableView;
 }
 
 - (void)fillContentTypes;
@@ -28,5 +29,6 @@
 @property (nonatomic, retain) NSMutableArray *pages;
 @property (nonatomic, retain) NSMutableArray *contents;
 @property (nonatomic, retain) NSDictionary *types;
+@property (nonatomic, retain) UITableView *tableView;
 
 @end
