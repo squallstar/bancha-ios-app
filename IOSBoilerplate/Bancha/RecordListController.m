@@ -16,7 +16,7 @@
 
 @implementation RecordListController
 
-@synthesize records, type, parent, cellNib, searchBar;
+@synthesize records, type, parent, cellNib, searchBar, alert;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -87,6 +87,13 @@
         }
 		self.title = [self.type objectForKey:@"description"];
     }
+	
+	if (!alert) {
+		alert = [[SideAlert alloc] initInFrame:self.view.frame WithTitle:@"Loading..."];
+		[self.view addSubview:alert];
+	}
+	alert.alpha = 0;
+	
     [self.tableView reloadData];
 }
 
@@ -212,6 +219,9 @@
 	[[[IOSBoilerplateAppDelegate sharedAppDelegate] api] setDelegate:self];
 	
 	NSString *query = [NSString stringWithFormat:@"type:%@|documents:TRUE|where:%@,%i|limit:1|get", [type objectForKey:@"id"], [type objectForKey:@"primary_key"], record_id];
+	
+	[alert setText:@"Loading record..."];
+	[alert fire];
     
     [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getRecordsByActiveQuery:query];
 }
@@ -224,6 +234,9 @@
 	[[[IOSBoilerplateAppDelegate sharedAppDelegate] api] setDelegate:self];
 	
 	NSString *query = [NSString stringWithFormat:@"type:%@|like:title,%@|order_by:date_publish,DESC|set_list:TRUE|limit:%i|get", [type objectForKey:@"id"], [searchB text], API_RECORD_RESULTS];
+	
+	[alert setText:@"Searching..."];
+	[alert fire];
     
     [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getRecordsByActiveQuery:query];
 
@@ -262,6 +275,8 @@
 	} else {
 		//Edit button clicked on a cell
 		clickedEditCell = FALSE;
+		
+		[alert removeAnimated];
 		
 		NSDictionary *record = [recs objectAtIndex:0];
 		

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RecordCell.h"
 #import "Api.h"
+#import "SideAlert.h"
 
 @interface RecordListController : UITableViewController <ApiDelegate, RecordCellDelegate, UISearchBarDelegate> {
     NSDictionary *type;
@@ -19,6 +20,7 @@
 	NSMutableDictionary *selectedIndexes;
 	BOOL shouldBeginEditing;
 	BOOL clickedEditCell;
+	SideAlert *alert;
 }
 
 -(void)addNewRecord;
@@ -29,5 +31,6 @@
 @property (nonatomic, assign) id parent;
 @property (nonatomic, retain) IBOutlet RecordCell *cellNib;
 @property (nonatomic, retain) UISearchBar *searchBar;
+@property (nonatomic, retain) SideAlert *alert;
 
 @end

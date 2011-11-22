@@ -121,6 +121,7 @@
 			
 				if (input != nil) {
 					[input setKey:fieldName];
+					[input setTextValue:value];
 					[mainSection addElement:input];
 				}
 				
@@ -141,7 +142,6 @@
 							selectedOption = i;
 							break;
 						}
-						
 						i++;
 					}
 				}
