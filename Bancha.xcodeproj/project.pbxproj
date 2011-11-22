@@ -61,6 +61,8 @@
 		E104C8A314716990000F9065 /* trash_stroke_12x12.png in Resources */ = {isa = PBXBuildFile; fileRef = E104C8A114716990000F9065 /* trash_stroke_12x12.png */; };
 		E104C8A6147171C0000F9065 /* RecordEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = E104C8A5147171C0000F9065 /* RecordEditController.m */; };
 		E12A2FD81464279500E4249C /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12A2FD71464279500E4249C /* LoginController.m */; };
+		E145EB1C147BBE84004845F9 /* bg_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = E145EB1B147BBE84004845F9 /* bg_cell.png */; };
+		E145EB20147BC19A004845F9 /* SideAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = E145EB1F147BC19A004845F9 /* SideAlert.m */; };
 		E151040F1464394200CEF7C1 /* QBadgeElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E15103CB1464394200CEF7C1 /* QBadgeElement.m */; };
 		E15104101464394200CEF7C1 /* QBadgeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E15103CD1464394200CEF7C1 /* QBadgeTableCell.m */; };
 		E15104111464394200CEF7C1 /* QBooleanElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E15103CF1464394200CEF7C1 /* QBooleanElement.m */; };
@@ -210,6 +212,9 @@
 		E104C8A5147171C0000F9065 /* RecordEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordEditController.m; sourceTree = "<group>"; };
 		E12A2FD61464279500E4249C /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		E12A2FD71464279500E4249C /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		E145EB1B147BBE84004845F9 /* bg_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_cell.png; path = IOSBoilerplate/bg_cell.png; sourceTree = SOURCE_ROOT; };
+		E145EB1E147BC19A004845F9 /* SideAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideAlert.h; sourceTree = "<group>"; };
+		E145EB1F147BC19A004845F9 /* SideAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideAlert.m; sourceTree = "<group>"; };
 		E15103CA1464394200CEF7C1 /* QBadgeElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBadgeElement.h; sourceTree = "<group>"; };
 		E15103CB1464394200CEF7C1 /* QBadgeElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBadgeElement.m; sourceTree = "<group>"; };
 		E15103CC1464394200CEF7C1 /* QBadgeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBadgeTableCell.h; sourceTree = "<group>"; };
@@ -514,6 +519,7 @@
 		E12A2FD51464276900E4249C /* Bancha */ = {
 			isa = PBXGroup;
 			children = (
+				E145EB1D147BC0D4004845F9 /* Custom Controls */,
 				E151043C146446A900CEF7C1 /* Api.h */,
 				E151043D146446A900CEF7C1 /* Api.m */,
 				E15104391464427600CEF7C1 /* Constants.h */,
@@ -528,6 +534,15 @@
 			);
 			name = Bancha;
 			path = IOSBoilerplate/Bancha;
+			sourceTree = "<group>";
+		};
+		E145EB1D147BC0D4004845F9 /* Custom Controls */ = {
+			isa = PBXGroup;
+			children = (
+				E145EB1E147BC19A004845F9 /* SideAlert.h */,
+				E145EB1F147BC19A004845F9 /* SideAlert.m */,
+			);
+			name = "Custom Controls";
 			sourceTree = "<group>";
 		};
 		E15103C91464394200CEF7C1 /* quickdialog */ = {
@@ -611,6 +626,7 @@
 			children = (
 				E104C8A014716990000F9065 /* document_stroke_16x16.png */,
 				E104C8A114716990000F9065 /* trash_stroke_12x12.png */,
+				E145EB1B147BBE84004845F9 /* bg_cell.png */,
 				E104C89E147168BA000F9065 /* pen_alt_stroke_12x12.png */,
 				E151043314643F9200CEF7C1 /* grain.gif */,
 				E15104351464408300CEF7C1 /* logo_shadow.png */,
@@ -710,6 +726,7 @@
 				E104C89F147168BA000F9065 /* pen_alt_stroke_12x12.png in Resources */,
 				E104C8A214716990000F9065 /* document_stroke_16x16.png in Resources */,
 				E104C8A314716990000F9065 /* trash_stroke_12x12.png in Resources */,
+				E145EB1C147BBE84004845F9 /* bg_cell.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +805,7 @@
 				E19F7D62146D3687005F151D /* NSString+HexColor.m in Sources */,
 				E104C8A6147171C0000F9065 /* RecordEditController.m in Sources */,
 				E1EF1E82147282040081D29B /* RecordEditNavigationController.m in Sources */,
+				E145EB20147BC19A004845F9 /* SideAlert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
