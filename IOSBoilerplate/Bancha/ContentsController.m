@@ -11,7 +11,7 @@
 
 @implementation ContentsController
 
-@synthesize structure, pages, contents, types;
+@synthesize structure, pages, contents, types, alert;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -53,9 +53,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
     self.title = @"Content types";
  
@@ -80,24 +77,16 @@
     if ([self.types count] == 0) {
         [self fillContentTypes];
     }
+	
+	if (alert == nil) {
+		alert = [[SideAlert alloc] initInFrame:self.view.frame WithTitle:@"Loading..."];
+		[self.view addSubview:alert];
+	}
+	alert.alpha = 0;
     
     [self.tableView reloadData];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -149,6 +138,7 @@
 }
 
 -(void)recordsObtained:(NSArray *)records forActiveQuery:(NSString *)typeName {
+	[alert removeAnimated];
     if (![records count]) {
         UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No records found!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [al show];
@@ -210,6 +200,8 @@
     NSDictionary *type = indexPath.section == 0 ? [pages objectAtIndex:indexPath.row] : [contents objectAtIndex:indexPath.row];
     
     NSString *query = [NSString stringWithFormat:@"type:%@|set_list:TRUE|order_by:date_publish,DESC|limit:%i|get", [type objectForKey:@"id"], API_RECORD_RESULTS];
+	
+	[alert fire];
     
     [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getRecordsByActiveQuery:query];
 

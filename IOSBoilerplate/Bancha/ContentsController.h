@@ -10,18 +10,21 @@
 #import "Constants.h"
 #import "IOSBoilerplateAppDelegate.h"
 #import "RecordListController.h"
+#import "SideAlert.h"
 
 @interface ContentsController : UITableViewController <ApiDelegate> {
     Structure structure;
     NSMutableArray *pages;
     NSMutableArray *contents;
     NSDictionary *types;
+	SideAlert *alert;
 }
 
 - (void)fillContentTypes;
 
 @property (nonatomic, assign) Structure structure;
 
+@property (nonatomic, retain) SideAlert *alert;
 @property (nonatomic, retain) NSMutableArray *pages;
 @property (nonatomic, retain) NSMutableArray *contents;
 @property (nonatomic, retain) NSDictionary *types;
