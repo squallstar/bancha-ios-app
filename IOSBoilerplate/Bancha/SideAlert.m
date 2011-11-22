@@ -20,6 +20,9 @@
 -(id)initInFrame:(CGRect)frame WithTitle:(NSString*)title {
 	self = [super initWithFrame:CGRectMake(0, frame.size.height-FRAME_HEIGHT, frame.size.width, FRAME_HEIGHT)];
     if (self) {
+		
+	
+		
         self.alpha = 0;
 		self.backgroundColor = [UIColor blackColor];
 		
