@@ -8,6 +8,6 @@
 
 #import "Constants.h"
 
-NSString * const API_URL = @"/api/";        //Needs the website admin prefix
+NSString * const API_URL = @"/api/"; //Needs the website admin prefix
 
 int const API_RECORD_RESULTS = 30;
