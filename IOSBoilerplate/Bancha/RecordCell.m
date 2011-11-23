@@ -11,8 +11,8 @@
 
 @implementation RecordCell
 
-@synthesize title, background, firstLine, secondLine, cellHeight, btnPublish;
-@synthesize record_id, delegate;
+@synthesize title, background, firstLine, secondLine, cellHeight, btnPublish, bg;
+@synthesize record_id, delegate, scroller;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -20,19 +20,28 @@
     if (self) {
         // Initialization code
 		self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 55.0);
+        
+        
     }
     return self;
 }
 
+-(void)prepare {
+    buttonsAdded = FALSE;
+    btnPublish = [[UIButton alloc] initWithFrame:CGRectMake(102, 4, 82, 31)];
+}
+
 -(void)setStage:(BOOL)stage {
 	if (stage) {
-		[[self background] setBackgroundColor:RGB(255, 244, 195)];
-		[btnPublish setTitle:@"Draft" forState:UIControlStateNormal];
-		[btnPublish setTitle:@"Draft" forState:UIControlStateHighlighted];
+		[self.bg setImage:[UIImage imageNamed:@"bg_cell_alt.png"]];
+		[btnPublish setTitle:@"Publish" forState:UIControlStateNormal];
+		[btnPublish setTitle:@"Publish" forState:UIControlStateHighlighted];
+        [btnPublish setBackgroundImage:[UIImage imageNamed:@"btnGreen.png"] forState:UIControlStateNormal];
 	} else {
-		[[self background] setBackgroundColor:[UIColor clearColor]];
-		[btnPublish setTitle:@"Published" forState:UIControlStateNormal];
-		[btnPublish setTitle:@"Published" forState:UIControlStateHighlighted];
+        [self.bg setImage:[UIImage imageNamed:@"bg_cell.png"]];
+		[btnPublish setTitle:@"Depublish" forState:UIControlStateNormal];
+		[btnPublish setTitle:@"Depublish" forState:UIControlStateHighlighted];
+        [btnPublish setBackgroundImage:[UIImage imageNamed:@"btnOrange.png"] forState:UIControlStateNormal];
 	}
 }
 
@@ -40,6 +49,33 @@
 	if (delegate != nil) {
 		[delegate cellClickedEditButton:record_id];
 	}
+}
+
+-(IBAction)triggerPublish:(id)sender {
+    //TODO
+}
+
+-(void)addButtons {
+    if (!buttonsAdded) {
+        
+        UIButton *btnEdit = [[UIButton alloc] initWithFrame:CGRectMake(12, 4, 82, 31)];
+        [btnEdit setBackgroundImage:[UIImage imageNamed:@"btnGrey.png"] forState:UIControlStateNormal];
+        [btnEdit setTitle:@"Edit" forState:UIControlStateNormal];
+        [btnEdit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [[btnEdit titleLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
+        [btnEdit addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchDown];
+        [self.scroller addSubview:btnEdit];
+        
+        btnPublish.frame = CGRectMake(102, 4, 82, 31);
+        [btnPublish setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [[btnPublish titleLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
+        [btnPublish addTarget:self action:@selector(triggerPublish:) forControlEvents:UIControlEventTouchDown];
+        [self.scroller addSubview:btnPublish];
+        
+        [self.scroller setAlwaysBounceHorizontal:YES];
+        
+        buttonsAdded = TRUE;
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
