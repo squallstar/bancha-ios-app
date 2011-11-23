@@ -30,7 +30,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Help" style:UIBarButtonItemStylePlain target:self action:@selector(onAbout)];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Help" style:UIBarButtonItemStylePlain target:self action:@selector(onAbout)] autorelease];
 	
 }
 
@@ -79,7 +79,8 @@
     QRootElement *details = [LoginController createDetailsForm];
 	
     QuickDialogController *quickform = [QuickDialogController controllerForRoot:details];
-    [self presentModalViewController:[[UINavigationController alloc] initWithRootViewController:quickform] animated:YES];
+    [self presentModalViewController:
+     [[[UINavigationController alloc] initWithRootViewController:quickform] autorelease] animated:YES];
 }
 
 -(void) cell:(UITableViewCell *)cell willAppearForElement:(QElement *)element atIndexPath:(NSIndexPath *)indexPath{
@@ -92,18 +93,19 @@
 
 
 + (QRootElement *)createDetailsForm {
-    QRootElement *details = [[QRootElement alloc] init];
+    QRootElement *details = [[[QRootElement alloc] init] autorelease];
     details.title = @"Details";
     details.controllerName = @"AboutController";
     details.grouped = YES;
     QSection *section = [[QSection alloc] initWithTitle:@"Information"];
-    [section addElement:[[QTextElement alloc] initWithText:@"Here's some more info about this app."]];
+    [section addElement:[[[QTextElement alloc] initWithText:@"Here's some more info about this app."] autorelease] ];
     [details addSection:section];
+    [section release];
     return details;
 }
 
 + (QRootElement *)createLoginForm {
-    QRootElement *root = [[QRootElement alloc] init];
+    QRootElement *root = [[[QRootElement alloc] init] autorelease];
     root.controllerName = @"LoginController";
     root.grouped = YES;
     root.title = @"Login";
@@ -117,6 +119,7 @@
     url.hiddenToolbar = YES;
     url.placeholder = @"www.example.com/admin";
     [main addElement:url];
+    [url release];
 	
 	QEntryElement *login = [[QEntryElement alloc] init];
     login.title = @"Username";
@@ -124,6 +127,7 @@
     login.hiddenToolbar = YES;
     login.placeholder = @"admin";
     [main addElement:login];
+    [login release];
 	
     QEntryElement *password = [[QEntryElement alloc] init];
     password.title = @"Password";
@@ -132,16 +136,20 @@
     password.hiddenToolbar = YES;
     password.placeholder = @"admin";
     [main addElement:password];
+    [password release];
 	
     [root addSection:main];
+    [main release];
 	
     QSection *btSection = [[QSection alloc] init];
     QButtonElement *btLogin = [[QButtonElement alloc] init];
     btLogin.title = @"Login";
     btLogin.controllerAction = @"onLogin:";
     [btSection addElement:btLogin];
+    [btLogin release];
 	
     [root addSection:btSection];
+    [btSection release];
 	
     //btSection.footerView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"footer"]];
 	

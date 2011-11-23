@@ -61,7 +61,7 @@
 }
 
 + (QRootElement *)createSettingsForm {
-    QRootElement *root = [[QRootElement alloc] init];
+    QRootElement *root = [[[QRootElement alloc] init] autorelease];
     root.controllerName = @"SettingsController";
     root.grouped = YES;
     root.title = @"Settings";
@@ -69,25 +69,31 @@
     QSection *main = [[QSection alloc] init];
 	
     [root addSection:main];
+    [main release];
 	
     QSection *updateSection = [[QSection alloc] init];
     QSection *btSection = [[QSection alloc] init];
     
     QLabelElement *lbl = [[QLabelElement alloc] initWithTitle:@"Last update" Value:@"just now"];
     [updateSection addElement:lbl];
+    [lbl release];
     
     QButtonElement *btTypes = [[QButtonElement alloc] init];
     btTypes.title = @"Update content types";
     btTypes.controllerAction = @"updateTypes:";
     [updateSection addElement:btTypes];
+    [btTypes release];
     
     QButtonElement *btLogin = [[QButtonElement alloc] init];
     btLogin.title = @"Logout";
     btLogin.controllerAction = @"doLogout:";
     [btSection addElement:btLogin];
+    [btLogin release];
 	
     [root addSection:updateSection];
+    [updateSection release];
     [root addSection:btSection];
+    [btSection release];
 	
     return root;
 }

@@ -65,6 +65,7 @@
         [[btnEdit titleLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
         [btnEdit addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchDown];
         [self.scroller addSubview:btnEdit];
+        [btnEdit release];
         
         btnPublish.frame = CGRectMake(102, 4, 82, 31);
         [btnPublish setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -79,6 +80,7 @@
         [[btnView titleLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
         //[btnView addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchDown];
         [self.scroller addSubview:btnView];
+        [btnView release];
         
         UIButton *btnDelete = [[UIButton alloc] initWithFrame:CGRectMake(282, 4, 82, 31)];
         [btnDelete setBackgroundImage:[UIImage imageNamed:@"btnGrey.png"] forState:UIControlStateNormal];
@@ -87,6 +89,7 @@
         [[btnDelete titleLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
         //[btnDelete addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchDown];
         [self.scroller addSubview:btnDelete];
+        [btnDelete release];
         
         [self.scroller setShowsHorizontalScrollIndicator:NO];
         [self.scroller setContentSize:CGSizeMake(374, scroller.frame.size.height)];        

@@ -35,7 +35,7 @@
 	
 	NSString *trimmedUri = [adminPath stringByTrimmingCharactersInSet:set];
 	
-	[self.client release];
+    self.client = nil;
     
     NSString *baseUrl = [NSString stringWithFormat:@"http://%@/api/", trimmedUri];
     
@@ -231,6 +231,11 @@
     
     [[IOSBoilerplateAppDelegate sharedAppDelegate] clearUserData];
     [[IOSBoilerplateAppDelegate sharedAppDelegate] switchToLogin];
+}
+
+-(void)dealloc {
+    [client release];
+    [super dealloc];
 }
 
 

@@ -31,7 +31,7 @@
     [super viewWillAppear:animated];
     [self loading:NO];
 	
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Actions" style:UIBarButtonItemStylePlain target:self action:@selector(showActions)];	
+	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Actions" style:UIBarButtonItemStylePlain target:self action:@selector(showActions)] autorelease];	
 	
 	self.navigationItem.backBarButtonItem =
 	[[[UIBarButtonItem alloc] initWithTitle:@"Back"
@@ -57,7 +57,7 @@
 #pragma mark - Form creation
 
 + (QRootElement *)createFormForContentType:(NSDictionary*)content_type andRecord:(NSDictionary*)record {
-	QRootElement *root = [[QRootElement alloc] init];
+	QRootElement *root = [[[QRootElement alloc] init] autorelease];
     root.controllerName = @"RecordEditController";
     root.grouped = YES;
     root.title = [record objectForKey:[content_type objectForKey:@"edit_link"]];
@@ -67,7 +67,8 @@
     QSection *main = [[QSection alloc] init];
 	
     [root addSection:main];
-	
+	[main release];
+    
     QSection *mainSection = [[QSection alloc] init];
   
     for (NSDictionary *fieldset in [content_type objectForKey:@"fieldsets"]) {
@@ -75,10 +76,12 @@
 		btnFieldset.title = [fieldset objectForKey:@"name"];
 		btnFieldset.controllerAction = @"openSection:";
 		[mainSection addElement:btnFieldset];
+        [btnFieldset release];
 	}
   	
     [root addSection:mainSection];
-	
+	[mainSection release];
+    
     return root;
 }
 
@@ -114,9 +117,9 @@
 				QEntryElement *input;
 				
 				if ([[field objectForKey:@"note"] isKindOfClass:[NSString class]]) {
-					input = [[QEntryElement alloc] initWithTitle:description Value:value Placeholder:[field objectForKey:@"note"]];
+					input = [[[QEntryElement alloc] initWithTitle:description Value:value Placeholder:[field objectForKey:@"note"]] autorelease];
 				} else {
-					input = [[QEntryElement alloc] initWithTitle:description Value:value];
+					input = [[[QEntryElement alloc] initWithTitle:description Value:value] autorelease];
 				}
 			
 				if (input != nil) {
@@ -133,6 +136,7 @@
                 [input setKey:fieldName];
                 
                 [mainSection addElement:input];
+                [input release];
                 
                 
 			} else if ([[field objectForKey:@"type"] isEqualToString:@"select"]
@@ -160,10 +164,12 @@
 				[select setGrouped:YES];
 				[select setTitle:description];
 				[mainSection addElement:select];
+                [select release];
 			}
 		}
 		
 		[root addSection:mainSection];
+        [mainSection release];
 		return root;
 	}
 	
@@ -191,16 +197,16 @@
 #pragma mark - Save and cancel data
 
 -(void)showActions {
-	UIActionSheet *actions = [[UIActionSheet alloc] initWithTitle:@"Actions"
+	UIActionSheet *actions = [[[UIActionSheet alloc] initWithTitle:@"Actions"
 														 delegate:self
-												cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Discard all" otherButtonTitles:@"Save", @"Save and publish", nil];
+												cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Discard all" otherButtonTitles:@"Save", @"Save and publish", nil] autorelease];
 	[actions showInView:self.view];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	
 	RecordEditNavigationController *parent = (RecordEditNavigationController*)self.navigationController;
-	NSMutableDictionary *fieldsToSave = [[NSMutableDictionary alloc] init];
+	NSMutableDictionary *fieldsToSave = [[[NSMutableDictionary alloc] init] autorelease];
 	
 	switch (buttonIndex) {
 		case 0:

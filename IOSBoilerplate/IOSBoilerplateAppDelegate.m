@@ -48,6 +48,7 @@
     
     UITabBarItem *sett = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:0];
     [settingsRoot setTabBarItem:sett];
+    [sett release];
     [self.tabsController addChildViewController:settingsRoot];
 
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"] != nil) {

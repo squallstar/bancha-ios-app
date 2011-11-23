@@ -148,7 +148,7 @@
         return;
     }
     
-    RecordListController *recordList = [[RecordListController alloc] init];
+    RecordListController *recordList = [[[RecordListController alloc] init] autorelease];
     [recordList setRecords:records];
     [recordList setParent:self];
     

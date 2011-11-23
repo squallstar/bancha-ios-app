@@ -49,6 +49,7 @@
 	UIBarButtonItem *new = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewRecord)];
 	
 	self.navigationItem.rightBarButtonItem = new;
+    [new release];
 	searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
 	self.tableView.tableHeaderView = searchBar;
 	[searchBar setDelegate:self];
@@ -168,6 +169,7 @@
 	}
 	
 	[[cell firstLine] setText:first];
+    [first release];
     
     return cell;
 }
@@ -283,7 +285,7 @@
 		
 		NSDictionary *record = [recs objectAtIndex:0];
 		
-		RecordEditNavigationController *editNav = [[RecordEditNavigationController alloc] initWithRootViewController:[RecordEditController controllerForRoot:[RecordEditController createFormForContentType:type andRecord:record]]];
+		RecordEditNavigationController *editNav = [[[RecordEditNavigationController alloc] initWithRootViewController:[RecordEditController controllerForRoot:[RecordEditController createFormForContentType:type andRecord:record]]] autorelease];
 	
 		[editNav setType:self.type];
 		[[editNav sections] removeAllObjects];
