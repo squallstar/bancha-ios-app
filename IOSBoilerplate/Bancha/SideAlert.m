@@ -18,7 +18,7 @@
 @synthesize textLabel;
 
 -(id)initInFrame:(CGRect)frame WithTitle:(NSString*)title {
-	self = [super initWithFrame:CGRectMake(0, frame.size.height-FRAME_HEIGHT, frame.size.width, FRAME_HEIGHT)];
+	self = [super initWithFrame:CGRectMake(0, frame.size.height, frame.size.width, FRAME_HEIGHT)];
     if (self) {
 		
 	
@@ -46,6 +46,7 @@
 	[UIView setAnimationDuration:ANIM_DURATION];
 	
 	self.alpha = MAX_ALPHA;
+    self.frame = CGRectMake(0, self.frame.origin.y-FRAME_HEIGHT, self.frame.size.width, FRAME_HEIGHT);
 	
 	[UIView commitAnimations];
 }
@@ -60,6 +61,7 @@
 	//[UIView setAnimationDidStopSelector:@selector(remove)];
 	
 	self.alpha = 0;
+    self.frame = CGRectMake(0, self.frame.origin.y+FRAME_HEIGHT, self.frame.size.width, FRAME_HEIGHT);
 	
 	[UIView commitAnimations];
 }
