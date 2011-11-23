@@ -11,7 +11,7 @@
 #import "RecordEditController.h"
 #import "RecordEditNavigationController.h"
 
-#define OPEN_HEIGHT 88.0f
+#define OPEN_HEIGHT 93.0f
 #define CLOSE_HEIGHT 55.0f
 
 @implementation RecordListController
@@ -143,6 +143,7 @@
 		cell = (RecordCell *)[nib objectAtIndex:0];
 		
 		[cell setDelegate:self];
+        [cell prepare];
 		[cell setClipsToBounds:YES];
 		[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 	}
@@ -200,6 +201,8 @@
     NSNumber *selectedIndex = [NSNumber numberWithBool:isSelected];
 	[selectedIndexes removeAllObjects];
     [selectedIndexes setObject:selectedIndex forKey:indexPath]; 
+    
+    [(RecordCell*)[self.tableView cellForRowAtIndexPath:indexPath] addButtons];
 	
     // This is where magic happens...
     [self.tableView beginUpdates];
