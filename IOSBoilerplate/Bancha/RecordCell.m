@@ -72,6 +72,24 @@
         [btnPublish addTarget:self action:@selector(triggerPublish:) forControlEvents:UIControlEventTouchDown];
         [self.scroller addSubview:btnPublish];
         
+        UIButton *btnView = [[UIButton alloc] initWithFrame:CGRectMake(192, 4, 82, 31)];
+        [btnView setBackgroundImage:[UIImage imageNamed:@"btnGrey.png"] forState:UIControlStateNormal];
+        [btnView setTitle:@"View" forState:UIControlStateNormal];
+        [btnView setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [[btnView titleLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
+        //[btnView addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchDown];
+        [self.scroller addSubview:btnView];
+        
+        UIButton *btnDelete = [[UIButton alloc] initWithFrame:CGRectMake(282, 4, 82, 31)];
+        [btnDelete setBackgroundImage:[UIImage imageNamed:@"btnGrey.png"] forState:UIControlStateNormal];
+        [btnDelete setTitle:@"Delete" forState:UIControlStateNormal];
+        [btnDelete setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [[btnDelete titleLabel] setFont:[UIFont boldSystemFontOfSize:12.0]];
+        //[btnDelete addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchDown];
+        [self.scroller addSubview:btnDelete];
+        
+        [self.scroller setShowsHorizontalScrollIndicator:NO];
+        [self.scroller setContentSize:CGSizeMake(374, scroller.frame.size.height)];        
         [self.scroller setAlwaysBounceHorizontal:YES];
         
         buttonsAdded = TRUE;
