@@ -110,7 +110,7 @@
 			NSString *value = [record objectForKey:fieldName];
 			
 			if ([[field objectForKey:@"type"] isEqualToString:@"text"]) {
-				//Input text
+				//Input text - singleline
 				QEntryElement *input;
 				
 				if ([[field objectForKey:@"note"] isKindOfClass:[NSString class]]) {
@@ -124,7 +124,18 @@
 					[input setTextValue:value];
 					[mainSection addElement:input];
 				}
-				
+			
+            } else if ([[field objectForKey:@"type"] isEqualToString:@"textarea"]
+					   || [[field objectForKey:@"type"] isEqualToString:@"textarea_full"]
+                       || [[field objectForKey:@"type"] isEqualToString:@"textarea_code"]) {
+            
+                //Textarea input
+                QTextElement *textEl = [[QTextElement alloc] initWithKey:fieldName];
+                [textEl setText:value];
+                
+                [mainSection addElement:textEl];
+                
+                
 			} else if ([[field objectForKey:@"type"] isEqualToString:@"select"]
 					   || [[field objectForKey:@"type"] isEqualToString:@"radio"]) {
 				
@@ -218,13 +229,39 @@
 							val = @"";
 						}
 						[fieldsToSave setObject:val forKey:el.key];
-					}
+					
+                    } else if ([[field objectForKey:@"type"] isEqualToString:@"textarea"]
+                               || [[field objectForKey:@"type"] isEqualToString:@"textarea_code"]
+                               || [[field objectForKey:@"type"] isEqualToString:@"textarea_full"]) {
+                        
+                        NSString *val = [(QTextElement*)el text];
+                        if (val == nil) {
+                            val = @"";
+                        }
+                        [fieldsToSave setObject:val forKey:el.key];
+                        
+                    } else if ([[field objectForKey:@"type"] isEqualToString:@"select"]
+                                || [[field objectForKey:@"type"] isEqualToString:@"radio"]) {
+                        
+                        QRadioElement *radioEl = (QRadioElement*)el;
+                        
+                        NSDictionary *options = [[[[parent type] objectForKey:@"fields"] objectForKey:radioEl.key] objectForKey:@"options"];
+                        if ([options count]) {
+                            int selectedIndex = [radioEl selected];
+                            NSString *selectedValue = [[options allKeys] objectAtIndex:selectedIndex];
+                            if (selectedValue) {
+                                [fieldsToSave setObject:selectedValue forKey:el.key];
+                            }
+                        }
+                        
+                    }
 					
 				}
 			}
 			
 			if ([fieldsToSave count]) {
 				//Saving
+                NSLog(@"SAVING: %@", fieldsToSave);
 				[self loading:YES];	
 				
 				[[[IOSBoilerplateAppDelegate sharedAppDelegate] api] setDelegate:self];
