@@ -121,7 +121,6 @@
 			
 				if (input != nil) {
 					[input setKey:fieldName];
-					[input setTextValue:value];
 					[mainSection addElement:input];
 				}
 			
@@ -130,10 +129,10 @@
                        || [[field objectForKey:@"type"] isEqualToString:@"textarea_code"]) {
             
                 //Textarea input
-                QTextElement *textEl = [[QTextElement alloc] initWithKey:fieldName];
-                [textEl setText:value];
+                QEntryElement *input = [[QEntryElement alloc] initWithTitle:description Value:value];
+                [input setKey:fieldName];
                 
-                [mainSection addElement:textEl];
+                [mainSection addElement:input];
                 
                 
 			} else if ([[field objectForKey:@"type"] isEqualToString:@"select"]
@@ -234,11 +233,11 @@
                                || [[field objectForKey:@"type"] isEqualToString:@"textarea_code"]
                                || [[field objectForKey:@"type"] isEqualToString:@"textarea_full"]) {
                         
-                        NSString *val = [(QTextElement*)el text];
-                        if (val == nil) {
-                            val = @"";
-                        }
-                        [fieldsToSave setObject:val forKey:el.key];
+                        NSString *val = [(QEntryElement*)el textValue];
+						if (val == nil) {
+							val = @"";
+						}
+						[fieldsToSave setObject:val forKey:el.key];
                         
                     } else if ([[field objectForKey:@"type"] isEqualToString:@"select"]
                                 || [[field objectForKey:@"type"] isEqualToString:@"radio"]) {
