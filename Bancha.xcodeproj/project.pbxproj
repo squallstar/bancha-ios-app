@@ -113,6 +113,7 @@
 		E19F7D5C146D212D005F151D /* RecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E19F7D5B146D212D005F151D /* RecordCell.xib */; };
 		E19F7D5F146D24F2005F151D /* RecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E19F7D5E146D24F2005F151D /* RecordCell.m */; };
 		E19F7D62146D3687005F151D /* NSString+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E19F7D61146D3687005F151D /* NSString+HexColor.m */; };
+		E1DB8C7C14993FBA00BB6696 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DB8C7B14993FBA00BB6696 /* MBProgressHUD.m */; };
 		E1EF1E82147282040081D29B /* RecordEditNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EF1E81147282040081D29B /* RecordEditNavigationController.m */; };
 		F87266BC145EF4E200B775D3 /* TwitterSearchClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F87266BB145EF4E200B775D3 /* TwitterSearchClient.m */; };
 /* End PBXBuildFile section */
@@ -313,6 +314,8 @@
 		E19F7D5E146D24F2005F151D /* RecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordCell.m; sourceTree = "<group>"; };
 		E19F7D60146D3687005F151D /* NSString+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HexColor.h"; sourceTree = "<group>"; };
 		E19F7D61146D3687005F151D /* NSString+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HexColor.m"; sourceTree = "<group>"; };
+		E1DB8C7A14993FBA00BB6696 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		E1DB8C7B14993FBA00BB6696 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		E1EF1E80147282040081D29B /* RecordEditNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordEditNavigationController.h; sourceTree = "<group>"; };
 		E1EF1E81147282040081D29B /* RecordEditNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordEditNavigationController.m; sourceTree = "<group>"; };
 		F87266BA145EF4E200B775D3 /* TwitterSearchClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterSearchClient.h; sourceTree = "<group>"; };
@@ -414,6 +417,7 @@
 		09885E9A1418F2E600CCE17A /* IOSBoilerplate */ = {
 			isa = PBXGroup;
 			children = (
+				E1DB8C7E14993FBD00BB6696 /* MBProgress */,
 				E15103C91464394200CEF7C1 /* quickdialog */,
 				093EC375145B0DE90010CDBB /* AFNetworking */,
 				092D3D29145AE52F002F5F6C /* AFURLCache */,
@@ -675,6 +679,15 @@
 			name = Interfaces;
 			sourceTree = "<group>";
 		};
+		E1DB8C7E14993FBD00BB6696 /* MBProgress */ = {
+			isa = PBXGroup;
+			children = (
+				E1DB8C7A14993FBA00BB6696 /* MBProgressHUD.h */,
+				E1DB8C7B14993FBA00BB6696 /* MBProgressHUD.m */,
+			);
+			name = MBProgress;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -838,6 +851,7 @@
 				E104C8A6147171C0000F9065 /* RecordEditController.m in Sources */,
 				E1EF1E82147282040081D29B /* RecordEditNavigationController.m in Sources */,
 				E145EB20147BC19A004845F9 /* SideAlert.m in Sources */,
+				E1DB8C7C14993FBA00BB6696 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

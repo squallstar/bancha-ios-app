@@ -11,6 +11,7 @@
 #import "IOSBoilerplateAppDelegate.h"
 #import "RecordListController.h"
 #import "SideAlert.h"
+#import "MBProgressHUD.h"
 
 @interface ContentsController : UIViewController <ApiDelegate, UITableViewDelegate, UITableViewDataSource> {
     Structure structure;
@@ -19,6 +20,7 @@
     NSDictionary *types;
 	SideAlert *alert;
 	UITableView *tableView;
+    MBProgressHUD *HUD;
 }
 
 - (void)fillContentTypes;
@@ -30,5 +32,6 @@
 @property (nonatomic, retain) NSMutableArray *contents;
 @property (nonatomic, retain) NSDictionary *types;
 @property (nonatomic, retain) UITableView *tableView;
+@property (nonatomic, retain) MBProgressHUD *HUD;
 
 @end

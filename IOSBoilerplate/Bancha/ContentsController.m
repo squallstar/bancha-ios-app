@@ -11,7 +11,7 @@
 
 @implementation ContentsController
 
-@synthesize structure, pages, contents, types, alert, tableView;
+@synthesize structure, pages, contents, types, alert, tableView, HUD;
 
 
 
@@ -62,6 +62,11 @@
 	[self.view addSubview:self.tableView];	
     
     [self fillContentTypes];
+    
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [HUD setAnimationType:MBProgressHUDAnimationZoom];
+    [self.navigationController.view addSubview:HUD];
+    
 }
 
 - (void)viewDidUnload
@@ -131,7 +136,6 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    // Configure the cell...
     NSDictionary *item = indexPath.section == 0 ? [pages objectAtIndex:indexPath.row] : [contents objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [item objectForKey:@"description"];
@@ -140,13 +144,17 @@
 }
 
 -(void)recordsObtained:(NSArray *)records forActiveQuery:(NSString *)typeName {
-	[alert removeAnimated];
     if (![records count]) {
-        UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No records found!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [al show];
-        [al release];
+               
+        [HUD setMode:MBProgressHUDModeDeterminate];
+        [HUD setProgress:0.0];
+        [HUD setLabelText:@"Error"];
+        [HUD setDetailsLabelText:@"No records found"];
+        [HUD hide:YES afterDelay:2.0];
         return;
     }
+    
+    [HUD hide:YES];
     
     RecordListController *recordList = [[[RecordListController alloc] init] autorelease];
     [recordList setRecords:records];
@@ -203,7 +211,10 @@
     
     NSString *query = [NSString stringWithFormat:@"type:%@|set_list:TRUE|order_by:date_publish,DESC|limit:%i|get", [type objectForKey:@"id"], API_RECORD_RESULTS];
 	
-	[alert fire];
+    [HUD setMode:MBProgressHUDModeIndeterminate];
+    [HUD setLabelText:@"Loading..."];
+    [HUD setDetailsLabelText:@""];
+    [HUD show:YES];
     
     [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getRecordsByActiveQuery:query];
 
