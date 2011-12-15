@@ -18,7 +18,6 @@
     NSMutableArray *pages;
     NSMutableArray *contents;
     NSDictionary *types;
-	SideAlert *alert;
 	UITableView *tableView;
     MBProgressHUD *HUD;
 }
@@ -27,7 +26,6 @@
 
 @property (nonatomic, assign) Structure structure;
 
-@property (nonatomic, retain) SideAlert *alert;
 @property (nonatomic, retain) NSMutableArray *pages;
 @property (nonatomic, retain) NSMutableArray *contents;
 @property (nonatomic, retain) NSDictionary *types;

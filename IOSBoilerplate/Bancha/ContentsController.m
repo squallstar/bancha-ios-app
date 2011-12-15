@@ -11,7 +11,7 @@
 
 @implementation ContentsController
 
-@synthesize structure, pages, contents, types, alert, tableView, HUD;
+@synthesize structure, pages, contents, types, tableView, HUD;
 
 
 
@@ -61,10 +61,8 @@
 	
 	[self.view addSubview:self.tableView];	
     
-    [self fillContentTypes];
-    
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [HUD setAnimationType:MBProgressHUDAnimationZoom];
+    [HUD setAnimationType:MBProgressHUDAnimationFade];
     [self.navigationController.view addSubview:HUD];
     
 }
@@ -81,15 +79,7 @@
     [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] setDelegate:self];
     [super viewWillAppear:animated];
     
-    if ([self.types count] == 0) {
-        [self fillContentTypes];
-    }
-	
-	if (alert == nil) {
-		alert = [[SideAlert alloc] initInFrame:self.view.frame WithTitle:@"Loading..."];
-		[self.view addSubview:alert];
-	}
-	alert.alpha = 0;
+    [self fillContentTypes];
     
     [self.tableView reloadData];
 }
