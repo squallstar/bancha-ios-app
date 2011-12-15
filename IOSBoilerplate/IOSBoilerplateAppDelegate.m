@@ -51,7 +51,7 @@
     [self.tabsController addChildViewController:settingsRoot];
 	
 	//Navigation bar appearance
-	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"topbar.png"] forBarMetrics:UIBarMetricsDefault];
+	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"topbar.png"] forBarMetrics:UIBarStyleDefault];
 	
 	
 	/* FINISH - LET'S LAUNCH THE ROOT CONTROLLER */

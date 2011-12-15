@@ -90,6 +90,9 @@
         cell.textLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0000];
     }   
 	
+	if ([element isKindOfClass:[QButtonElement class]]){
+		cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_green.png"]];
+	}
 	
 }
 
