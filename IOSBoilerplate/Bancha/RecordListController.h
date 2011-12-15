@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RecordCell.h"
 #import "Api.h"
-#import "SideAlert.h"
+#import "MBProgressHUD.h"
 
 @interface RecordListController : UIViewController <ApiDelegate, RecordCellDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource> {
     NSDictionary *type;
@@ -20,7 +20,7 @@
 	NSMutableDictionary *selectedIndexes;
 	BOOL shouldBeginEditing;
 	BOOL clickedEditCell;
-	SideAlert *alert;
+	MBProgressHUD *HUD;
 	UITableView *tableView;
 }
 
@@ -33,6 +33,6 @@
 @property (nonatomic, assign) id parent;
 @property (nonatomic, retain) IBOutlet RecordCell *cellNib;
 @property (nonatomic, retain) UISearchBar *searchBar;
-@property (nonatomic, retain) SideAlert *alert;
+@property (nonatomic, retain) MBProgressHUD *HUD;
 
 @end

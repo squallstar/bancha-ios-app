@@ -16,7 +16,7 @@
 
 @implementation RecordListController
 
-@synthesize records, type, parent, cellNib, searchBar, alert, tableView;
+@synthesize records, type, parent, cellNib, searchBar, HUD, tableView;
 
 
 - (void)didReceiveMemoryWarning
@@ -56,6 +56,10 @@
 	
 	[searchBar setPlaceholder:@"Search by title"];
 	
+	HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [HUD setAnimationType:MBProgressHUDAnimationFade];
+    [self.navigationController.view addSubview:HUD];
+	
 }
 
 - (void)viewDidUnload
@@ -88,12 +92,6 @@
         }
 		self.title = [self.type objectForKey:@"description"];
     }
-	
-	if (!alert) {
-		alert = [[SideAlert alloc] initInFrame:self.view.frame WithTitle:@"Loading..."];
-		[self.view addSubview:alert];
-	}
-	alert.alpha = 0;
 	
     [self.tableView reloadData];
 }
@@ -225,8 +223,8 @@
 	
 	NSString *query = [NSString stringWithFormat:@"type:%@|documents:TRUE|where:%@,%i|limit:1|get", [type objectForKey:@"id"], [type objectForKey:@"primary_key"], record_id];
 	
-	[alert setText:@"Loading record..."];
-	[alert fire];
+	[HUD setLabelText:@"Retrieving record..."];
+	[HUD show:YES];
     
     [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getRecordsByActiveQuery:query];
 }
@@ -240,8 +238,8 @@
 	
 	NSString *query = [NSString stringWithFormat:@"type:%@|like:title,%@|order_by:date_publish,DESC|set_list:TRUE|limit:%i|get", [type objectForKey:@"id"], [searchB text], API_RECORD_RESULTS];
 	
-	[alert setText:@"Searching..."];
-	[alert fire];
+	[HUD setLabelText:@"Searching..."];
+	[HUD show:YES];
     
     [[[IOSBoilerplateAppDelegate sharedAppDelegate] api] getRecordsByActiveQuery:query];
 
@@ -274,14 +272,13 @@
 }
 
 -(void)recordsObtained:(NSArray *)recs forActiveQuery:(NSString *)typeName {
+	[HUD hide:YES];
 	if (!clickedEditCell) {
 		self.records = recs;
 		[self.tableView reloadData];
 	} else {
 		//Edit button clicked on a cell
 		clickedEditCell = FALSE;
-		
-		[alert removeAnimated];
 		
 		NSDictionary *record = [recs objectAtIndex:0];
 		
