@@ -8,6 +8,7 @@
 
 #import "LoginController.h"
 #import "IOSBoilerplateAppDelegate.h"
+#import "BanchaNavigationBar.h"
 
 @interface LoginController ()
 - (void)onLogin:(QButtonElement *)buttonElement;
@@ -22,21 +23,20 @@
     [super loadView];
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grain.gif"]];
 	
-	self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.tableView.bounces = NO;
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grain.png"]];
+    self.tableView.bounces = YES;
     ((QuickDialogTableView *)self.tableView).styleProvider = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Help" style:UIBarButtonItemStylePlain target:self action:@selector(onAbout)] autorelease];
+
+    /*self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Help" style:UIBarButtonItemStylePlain target:self action:@selector(onAbout)] autorelease];*/
 	
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    //self.navigationController.navigationBar.tintColor = nil;
 }
 
 
@@ -84,11 +84,13 @@
 }
 
 -(void) cell:(UITableViewCell *)cell willAppearForElement:(QElement *)element atIndexPath:(NSIndexPath *)indexPath{
-    cell.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0000];
-    
+    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grain.gif"]];
+
     if ([element isKindOfClass:[QEntryElement class]] || [element isKindOfClass:[QButtonElement class]]){
-        cell.textLabel.textColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1.0000];
+        cell.textLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0000];
     }   
+	
+	
 }
 
 
@@ -111,13 +113,13 @@
     root.title = @"Login";
 	
     QSection *main = [[QSection alloc] init];
-    //main.headerView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_shadow.png"]];
+    main.headerView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
 	
     QEntryElement *url = [[QEntryElement alloc] init];
-    url.title = @"Location";
+    url.title = @"Admin URL";
     url.key = @"url";
     url.hiddenToolbar = YES;
-    url.placeholder = @"www.example.com/admin";
+    url.placeholder = @"hostname/admin";
     [main addElement:url];
     [url release];
 	
@@ -125,7 +127,7 @@
     login.title = @"Username";
     login.key = @"username";
     login.hiddenToolbar = YES;
-    login.placeholder = @"admin";
+    login.placeholder = @"John doe";
     [main addElement:login];
     [login release];
 	
@@ -134,7 +136,7 @@
     password.key = @"password";
     password.secureTextEntry = YES;
     password.hiddenToolbar = YES;
-    password.placeholder = @"admin";
+    password.placeholder = @"";
     [main addElement:password];
     [password release];
 	

@@ -43,14 +43,19 @@
 	
 	self.api = [[Api alloc] init];
     
-    //We create the settings form view
+    //We create the settings controller
     UINavigationController *settingsRoot = [QuickDialogController controllerWithNavigationForRoot:[SettingsController createSettingsForm]];
-    
     UITabBarItem *sett = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:0];
     [settingsRoot setTabBarItem:sett];
     [sett release];
     [self.tabsController addChildViewController:settingsRoot];
-
+	
+	//Navigation bar appearance
+	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"topbar.png"] forBarMetrics:UIBarMetricsDefault];
+	
+	
+	/* FINISH - LET'S LAUNCH THE ROOT CONTROLLER */
+	
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"] != nil) {
         [self switchToTabBar];
     } else {
