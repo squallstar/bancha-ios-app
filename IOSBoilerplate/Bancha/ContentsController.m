@@ -129,6 +129,7 @@
     NSDictionary *item = indexPath.section == 0 ? [pages objectAtIndex:indexPath.row] : [contents objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [item objectForKey:@"description"];
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
