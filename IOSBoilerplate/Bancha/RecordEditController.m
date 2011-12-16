@@ -114,26 +114,24 @@
 			
 			if ([[field objectForKey:@"type"] isEqualToString:@"text"]) {
 				//Input text - singleline
-				QEntryElement *input;
+				QEntryElement *input = [[QEntryElement alloc] initWithKey:fieldName];
 				
 				if ([[field objectForKey:@"note"] isKindOfClass:[NSString class]]) {
-					input = [[[QEntryElement alloc] initWithTitle:description Value:value Placeholder:[field objectForKey:@"note"]] autorelease];
-				} else {
-					input = [[[QEntryElement alloc] initWithTitle:description Value:value] autorelease];
+					[input setPlaceholder:[field objectForKey:@"note"]];
 				}
-			
-				if (input != nil) {
-					[input setKey:fieldName];
-					[mainSection addElement:input];
-				}
+				
+				[input setTitle:description];
+				[input setTextValue:value];
+				[mainSection addElement:input];
 			
             } else if ([[field objectForKey:@"type"] isEqualToString:@"textarea"]
 					   || [[field objectForKey:@"type"] isEqualToString:@"textarea_full"]
                        || [[field objectForKey:@"type"] isEqualToString:@"textarea_code"]) {
             
                 //Textarea input
-                QEntryElement *input = [[QEntryElement alloc] initWithTitle:description Value:value];
-                [input setKey:fieldName];
+                QEntryElement *input = [[QEntryElement alloc] initWithKey:fieldName];
+                [input setTitle:description];
+				[input setValue:value];
                 
                 [mainSection addElement:input];
                 [input release];
@@ -142,6 +140,7 @@
 			} else if ([[field objectForKey:@"type"] isEqualToString:@"select"]
 					   || [[field objectForKey:@"type"] isEqualToString:@"radio"]) {
 				
+				//Select field
 				id options = [field objectForKey:@"options"];
 				if (![options isKindOfClass:[NSDictionary class]]) {
 					continue;
@@ -208,6 +207,8 @@
 	RecordEditNavigationController *parent = (RecordEditNavigationController*)self.navigationController;
 	NSMutableDictionary *fieldsToSave = [[[NSMutableDictionary alloc] init] autorelease];
 	
+	[fieldsToSave addEntriesFromDictionary:parent.record];
+	
 	switch (buttonIndex) {
 		case 0:
 			//Discard
@@ -220,7 +221,7 @@
 			//Save and publish
 			for (QuickDialogController *c in [parent.sections allValues]) {
 				QSection *sect = [c.root getSectionForIndex:0];
-				//NSLog(@"TYPE %@", [parent type]);
+
 				for (QElement *el in [sect elements]) {
 					
 					if (el.key == nil) continue;

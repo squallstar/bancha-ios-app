@@ -87,7 +87,7 @@
     cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grain.gif"]];
 
     if ([element isKindOfClass:[QEntryElement class]] || [element isKindOfClass:[QButtonElement class]]){
-        cell.textLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0000];
+        cell.textLabel.textColor = [UIColor whiteColor];
     }   
 	
 	if ([element isKindOfClass:[QButtonElement class]]){
