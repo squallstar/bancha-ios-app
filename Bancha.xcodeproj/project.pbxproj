@@ -174,7 +174,7 @@
 		09885E941418F2E500CCE17A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		09885E961418F2E500CCE17A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		09885E981418F2E600CCE17A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		09885E9C1418F2E600CCE17A /* IOSBoilerplate-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IOSBoilerplate-Info.plist"; sourceTree = "<group>"; };
+		09885E9C1418F2E600CCE17A /* Bancha-Info.plist */ = {isa = PBXFileReference; path = "Bancha-Info.plist"; sourceTree = "<group>"; };
 		09885E9E1418F2E600CCE17A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		09885EA01418F2E600CCE17A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		09885EA21418F2E600CCE17A /* IOSBoilerplate-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IOSBoilerplate-Prefix.pch"; sourceTree = "<group>"; };
@@ -461,7 +461,7 @@
 			children = (
 				E19F7D58146D1725005F151D /* Interfaces */,
 				E19F7D4F146D15FD005F151D /* Images */,
-				09885E9C1418F2E600CCE17A /* IOSBoilerplate-Info.plist */,
+				09885E9C1418F2E600CCE17A /* Bancha-Info.plist */,
 				09885EA21418F2E600CCE17A /* IOSBoilerplate-Prefix.pch */,
 				09885E9D1418F2E600CCE17A /* InfoPlist.strings */,
 				09885EA01418F2E600CCE17A /* main.m */,
@@ -978,7 +978,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOSBoilerplate/IOSBoilerplate-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "IOSBoilerplate/IOSBoilerplate-Info.plist";
+				INFOPLIST_FILE = "IOSBoilerplate/Bancha-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1000,7 +1000,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOSBoilerplate/IOSBoilerplate-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "IOSBoilerplate/IOSBoilerplate-Info.plist";
+				INFOPLIST_FILE = "IOSBoilerplate/Bancha-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
