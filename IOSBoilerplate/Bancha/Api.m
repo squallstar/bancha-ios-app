@@ -182,11 +182,11 @@
 	//Prepare data
 	NSMutableDictionary *postData = [NSMutableDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"api_token"], @"token", nil];
 	[postData addEntriesFromDictionary:data];
-	[postData setObject:[NSString stringWithFormat:@"%i", type_id] forKey:@"_type"];
-	[postData setObject:id_record forKey:@"_id"];
+	
+	NSString *url = [NSString stringWithFormat:@"record/save/%i", type_id];
 	
 	//1.Save
-	NSURLRequest *request = [self.client requestWithMethod:@"POST" path:@"record/update" parameters:postData];
+	NSURLRequest *request = [self.client requestWithMethod:@"POST" path:url parameters:postData];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 		
@@ -201,7 +201,7 @@
             [self tokenInvalidScript];
 		} else {
 			
-			UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot update!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+			UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Cannot update!" message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 			[al show];
 			[al release];
 			
@@ -211,7 +211,7 @@
 		
 		
 	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
-		NSLog(@"%@", error);
+		NSLog(@"ERROR: %@", error);
 		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [delegate updateFinished:YES];
 	}];
