@@ -978,8 +978,8 @@
 		09885EC91418F2E600CCE17A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Nicholas Valbusa";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Nicholas Valbusa";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicholas Valbusa (UM9M59EAK6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOSBoilerplate/IOSBoilerplate-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -993,8 +993,8 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = Bancha;
-				PROVISIONING_PROFILE = "2B3826AB-A96A-43F7-84B1-4CC66F3E1B28";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2B3826AB-A96A-43F7-84B1-4CC66F3E1B28";
+				PROVISIONING_PROFILE = "00FEB2C7-148E-48F0-8FC5-90E56D863C37";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1002,8 +1002,8 @@
 		09885ECA1418F2E600CCE17A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Nicholas Valbusa";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicholas Valbusa (UM9M59EAK6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOSBoilerplate/IOSBoilerplate-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1017,8 +1017,8 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = Bancha;
-				PROVISIONING_PROFILE = "2B3826AB-A96A-43F7-84B1-4CC66F3E1B28";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2B3826AB-A96A-43F7-84B1-4CC66F3E1B28";
+				PROVISIONING_PROFILE = "00FEB2C7-148E-48F0-8FC5-90E56D863C37";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
