@@ -23,6 +23,8 @@
     [super loadView];
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grain.gif"]];
 	
+    [self.navigationController setNavigationBarHidden:YES];
+    
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grain.png"]];
     self.tableView.bounces = YES;
     ((QuickDialogTableView *)self.tableView).styleProvider = self;
