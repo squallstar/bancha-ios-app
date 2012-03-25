@@ -84,16 +84,16 @@
 }
 
 -(void) cell:(UITableViewCell *)cell willAppearForElement:(QElement *)element atIndexPath:(NSIndexPath *)indexPath{
-    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grain.gif"]];
+    //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grain.gif"]];
 
-    if ([element isKindOfClass:[QEntryElement class]] || [element isKindOfClass:[QButtonElement class]]){
-        cell.textLabel.textColor = [UIColor whiteColor];
+    if ([element isKindOfClass:[QEntryElement class]]){
+        //cell.textLabel.textColor = [UIColor whiteColor];
     }   
 	
 	if ([element isKindOfClass:[QButtonElement class]]){
 		cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_green.png"]];
-	}
-	
+        cell.textLabel.textColor = [UIColor whiteColor];
+	}	
 }
 
 

@@ -7,7 +7,6 @@
 //
 
 #import "RecordCell.h"
-#import "Constants.h"
 
 @implementation RecordCell
 

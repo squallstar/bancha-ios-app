@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Constants.h"
 #import "IOSBoilerplateAppDelegate.h"
 #import "RecordListController.h"
 #import "SideAlert.h"
