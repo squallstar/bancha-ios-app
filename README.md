@@ -8,6 +8,9 @@ Currently not using ARC (Automatic reference counting) due to **JSONKit** lack o
 Based on Bancha Open-Source CMS project by Nicholas Valbusa
 https://github.com/squallstar/bancha
 
+You can download the latest version of the Bancha iOS App on the iTunes App Store:
+http://itunes.apple.com/us/app/bancha/id513699605?mt=8&ign-mpt=uo%3D2
+
 
 --------------
 Project status
