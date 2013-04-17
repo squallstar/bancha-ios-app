@@ -11,6 +11,9 @@ https://github.com/squallstar/bancha
 You can download the latest version of the Bancha iOS App on the iTunes App Store:
 http://itunes.apple.com/us/app/bancha/id513699605?mt=8&ign-mpt=uo%3D2
 
+<a href="https://www.cisimple.com/jobs/hxsyy4685lc6464ga"><img src='https://www.cisimple.com/jobs/hxsyy4685lc6464ga/build_status.png'/></a>
+
+Continuous Integration provided by [cisimple](https://www.cisimple.com).
 
 --------------
 Project status
